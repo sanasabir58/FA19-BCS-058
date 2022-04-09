@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'containercode.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'textoricon.dart';
 class homepage extends StatefulWidget {
   const homepage({Key? key}) : super(key: key);
 
@@ -19,10 +21,17 @@ class _homepageState extends State<homepage> {
             children: [
               Expanded(child: Repeatcontainercode(
                 colors: Color(0xFF1D1E33),
-              ),
-              ),
+                cardWidget: Repeaticontext(
+                  iconData: FontAwesomeIcons.person,
+                  label: 'Male',
+                ),
+              ),),
               Expanded(child:Repeatcontainercode(
                 colors: Color(0xFF1D1E33),
+                cardWidget: Repeaticontext(
+                  iconData: FontAwesomeIcons.personDress,
+                  label: 'Female',
+                ),
               ),
               ),
             ],
@@ -45,16 +54,6 @@ class _homepageState extends State<homepage> {
   }
 }
 
-class Repeatcontainercode extends StatelessWidget {
-  Repeatcontainercode({@required  this.colors});
-  final Color? colors;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: colors,
-        borderRadius: BorderRadius.circular(10.0),
-      ),);
-  }
-}
+
+
+
