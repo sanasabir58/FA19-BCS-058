@@ -2,14 +2,31 @@ import 'package:flutter/material.dart';
 import 'containercode.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'textoricon.dart';
-class homepage extends StatefulWidget {
-  const homepage({Key? key}) : super(key: key);
+const activeColor = Color(0xFF1D1E33);
+const deActiveColor = Color(0xFF111328);
+class InputPage extends StatefulWidget {
+  const InputPage({Key? key}) : super(key: key);
 
   @override
-  _homepageState createState() => _homepageState();
+  _InputPageState createState() => _InputPageState();
 }
 
-class _homepageState extends State<homepage> {
+class _InputPageState extends State<InputPage> {
+  Color maleColor=deActiveColor;
+  Color femaleColor=deActiveColor;
+  void updateColor(int gender)
+  {
+    if(gender==1)
+      {
+       maleColor=activeColor;
+       femaleColor=deActiveColor;
+      }
+    if(gender==2)
+    {
+      maleColor=deActiveColor;
+      femaleColor=activeColor;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,20 +36,36 @@ class _homepageState extends State<homepage> {
         children: [
           Expanded(child: Row(
             children: [
-              Expanded(child: Repeatcontainercode(
-                colors: Color(0xFF1D1E33),
-                cardWidget: Repeaticontext(
-                  iconData: FontAwesomeIcons.person,
-                  label: 'Male',
-                ),
-              ),),
-              Expanded(child:Repeatcontainercode(
-                colors: Color(0xFF1D1E33),
-                cardWidget: Repeaticontext(
-                  iconData: FontAwesomeIcons.personDress,
-                  label: 'Female',
-                ),
+              Expanded(
+                child: GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      updateColor(1);
+                    });
+                  },
+                  child: Repeatcontainercode(
+                  colors: maleColor,
+                  cardWidget: Repeaticontext(
+                    iconData: FontAwesomeIcons.person,
+                    label: 'Male',
+                  ),
               ),
+                ),),
+              Expanded(
+                child: GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      updateColor(2);
+                    });
+                  },
+                  child: Repeatcontainercode(
+                  colors: femaleColor,
+                  cardWidget: Repeaticontext(
+                    iconData: FontAwesomeIcons.personDress,
+                    label: 'Female',
+                  ),
+              ),
+                ),
               ),
             ],
           ),),
