@@ -13,3 +13,21 @@ fontWeight: FontWeight.w900);
    fontSize: 25.0,
    fontWeight: FontWeight.bold,
  );
+ const ktitlestyles2=TextStyle(
+   fontWeight: FontWeight.bold,
+   fontSize: 50.0,
+ );
+ const kresulttexts2=TextStyle(
+fontSize: 30.0,
+   fontWeight: FontWeight.bold,
+   color: Color(0xFFBA68C8)
+ );
+const kbmitextstyles2=TextStyle(
+    fontSize: 100.0,
+    fontWeight: FontWeight.bold,
+);
+const kbmibodystyles2=TextStyle(
+  fontSize: 30.0,
+  fontWeight: FontWeight.bold,
+);
+
