@@ -1,3 +1,4 @@
+import 'package:bmicalculator/constantfile.dart';
 import 'package:flutter/material.dart';
 class Repeaticontext extends StatelessWidget {
   Repeaticontext({@required this.iconData,this.label});
@@ -17,7 +18,8 @@ class Repeaticontext extends StatelessWidget {
         ),
         Text(
           label!,
-          style: TextStyle(fontSize: 30.0),),
+          style: kLabelStyle,
+        ),
       ],
     );
   }
