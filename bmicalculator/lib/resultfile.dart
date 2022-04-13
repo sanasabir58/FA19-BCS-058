@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'containercode.dart';
 import 'constantfile.dart';
 class resultscreen extends StatelessWidget {
-  const resultscreen({Key? key}) : super(key: key);
-
+  resultscreen( {@required this.information,@required this.resulttext,@required this.bmiresult});
+final String? information;
+final String? resulttext;
+final String? bmiresult;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +32,11 @@ class resultscreen extends StatelessWidget {
                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                    crossAxisAlignment: CrossAxisAlignment.center,
                    children: [
-                     Text('Normal',
+                     Text( resulttext!.toUpperCase(),
                          style: kresulttexts2),
-                   Text('18.0',
+                   Text(bmiresult!,
                        style: kbmitextstyles2),
-                     Text('bmi is low you should',textAlign: TextAlign.center,
+                     Text(information!,textAlign: TextAlign.center,
                          style: kbmibodystyles2),
                    ],
                  ),
