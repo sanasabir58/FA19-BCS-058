@@ -4,6 +4,7 @@ import 'containercode.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'textoricon.dart';
 import 'constantfile.dart';
+import 'resultfile.dart';
 enum Gender{
   male,
   female,
@@ -169,11 +170,21 @@ class _InputPageState extends State<InputPage> {
               ),
             ],
           ),),
-          Container(
-            color: Color(0xFFBA68C8),
-            margin: EdgeInsets.only(top: 10.0),
-            height: 80.0,
-            width: double.infinity,
+          GestureDetector(
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>resultscreen()));
+            },
+            child: Container(
+              child: Center(
+                child: Text('Calculator',
+                    style: kLargebutton
+                ),
+              ),
+              color: Color(0xFFBA68C8),
+              margin: EdgeInsets.only(top: 10.0),
+              height: 80.0,
+              width: double.infinity,
+            ),
           ),
         ],
       )
