@@ -1,16 +1,4 @@
-# bmicalculator
+![2](https://user-images.githubusercontent.com/101867596/163524673-f22041ab-9b16-4ba7-804c-3502e06d39e7.PNG)
+![3](https://user-images.githubusercontent.com/101867596/163524677-03f8cc1e-082e-4119-8292-fb6ccfbd74fc.PNG)
+![4](https://user-images.githubusercontent.com/101867596/163524685-88f3596b-2f4b-483f-89cf-1ab26f1aad72.PNG)
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
