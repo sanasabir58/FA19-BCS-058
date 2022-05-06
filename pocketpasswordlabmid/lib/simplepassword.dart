@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class simplepassword extends StatefulWidget {
   const simplepassword({Key? key}) : super(key: key);
@@ -7,6 +10,30 @@ class simplepassword extends StatefulWidget {
 }
 
 class _simplepasswordState extends State<simplepassword> {
+  TextEditingController text=new TextEditingController();
+  String generatepassword(){
+    const characters = 'abcdefghijklmnopqrstuvwxyz';
+    const number = '1234567890';
+    String char;
+    String num;
+    Random random = Random();
+    num= String.fromCharCodes(Iterable.generate(4, (_) => number.codeUnitAt(random.nextInt(number.length))));
+    char= String.fromCharCodes(Iterable.generate(4, (_) => characters.codeUnitAt(random.nextInt(characters.length))));
+
+
+    return num+char;
+    //final len=8;
+    //final Lowercaseletter = "abcdefghijklmnopqrstuvwxyz";
+    //final n="0123456789";
+    //String chars ='';
+     //chars +="$Lowercaseletter";
+    //chars +="$n";
+
+     //return List.generate(len, (index){
+       //final indexrandom=Random.secure().nextInt(chars.length);
+       //return chars[indexrandom];
+
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,12 +51,18 @@ class _simplepasswordState extends State<simplepassword> {
                     children: [
                           ListTile(leading: Icon(Icons.password),
                           title: TextFormField(
+                            controller: text,
                             validator: (val)=>val==""?val:null,
             ),
           ),
+                   Text('Hint: 1234sana'),
                    SizedBox(height: 10.0,),
-                   ElevatedButton(onPressed: (){}, child: Text("save"),),
-                      ElevatedButton(onPressed: (){}, child: Text("Generate Password"),),
+                      ElevatedButton(onPressed: (){
+                        final password=generatepassword();
+                        text.text=password;
+
+                      }, child: Text("Generate Password"),),
+                      ElevatedButton(onPressed: (){}, child: Text("save"),),
         ]),
 
             ),),
