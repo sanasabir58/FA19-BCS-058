@@ -36,7 +36,12 @@ class _simplepasswordState extends State<simplepassword> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-        appBar: AppBar(title: Text("Simple Password"),
+        appBar: AppBar(
+          actions: [CircleAvatar(
+            backgroundImage: AssetImage('images/s2.jpg'),
+            radius: 20.0,
+            backgroundColor: Colors.white,),],
+          title: Text("Simple Password"),
           backgroundColor: Colors.purple,
           centerTitle: true,
         ),

@@ -26,8 +26,17 @@ class _pocketpasswordState extends State<pocketpassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Pocket Password Dairy"),
+        appBar: AppBar(
+          actions: [
+            CircleAvatar(
+              backgroundImage: AssetImage('images/s2.jpg'),
+              radius: 20.0,
+              backgroundColor: Colors.white,),
+          ],
+          title: Text("Pocket Password Dairy"),
           backgroundColor: Colors.purple,
+          elevation: 20.0,
+          shadowColor: Colors.purpleAccent,
           centerTitle: true,
         ),
         body: SafeArea(
@@ -36,36 +45,50 @@ class _pocketpasswordState extends State<pocketpassword> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  CircleAvatar(
+                    backgroundImage: AssetImage('images/ss.jpg'),
+                    radius: 70.0,
+                    backgroundColor: Colors.purple,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   ElevatedButton(onPressed:(){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>simplepassword()));
                   },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.purple,
-                      elevation: 5, // Elevation
+                      elevation: 10.0, // Elevation
                       shadowColor: Colors.purpleAccent,
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0),
                       ),
                     ),
                     child: Text('Simple Password'),),
+                  SizedBox(
+                    height: 10,
+                  ),
                   ElevatedButton(onPressed:(){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>toughpassword()));
                   },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.purple,
-                      elevation: 5, // Elevation
+                      elevation: 10.0, // Elevation
                       shadowColor: Colors.purpleAccent,
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0),
                       ),
                     ),
                     child: Text('Tough Password'),),
+                  SizedBox(
+                    height: 10,
+                  ),
                   ElevatedButton(onPressed:(){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>passview()));
                   },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.purple,
-                      elevation: 5, // Elevation
+                      elevation: 10.0, // Elevation
                       shadowColor: Colors.purpleAccent,
                       shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(30.0),

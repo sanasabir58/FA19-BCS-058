@@ -16,6 +16,12 @@ class _passviewState extends State<passview> {
   Widget build(BuildContext context) {
     return  Scaffold(
         appBar: AppBar(
+          actions: [
+            CircleAvatar(
+              backgroundImage: AssetImage('images/s2.jpg'),
+              radius: 20.0,
+              backgroundColor: Colors.white,),
+          ],
           title: Text("View Password"),
           backgroundColor: Colors.purple,
           centerTitle: true,
