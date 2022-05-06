@@ -25,7 +25,45 @@ class _passviewState extends State<passview> {
             return ListView.builder(
               itemCount: snapshot.data.docs.length,
                 itemBuilder: (context,int index){
-              return Text(snapshot.data.docs[index]['password']);
+                return Card(
+                  child: Column(
+                    children: [
+                 ListTile(
+                   title: Text("Password"),
+                   subtitle: Text(snapshot.data.docs[index]['password']),
+                 ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ElevatedButton(onPressed: (){},
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.purple,
+                              elevation: 5,  // Elevation
+                              shadowColor: Colors.purpleAccent,
+                              shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0),
+                            ),),
+                            child: Text('Delete'),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          ElevatedButton(onPressed: (){},
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.purple,
+                              elevation: 5,  // Elevation
+                              shadowColor: Colors.purpleAccent,
+                              shape: new RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(30.0),
+                            ),),
+                            child: Text('Update'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              //return Text(snapshot.data.docs[index]['password']);
             });
           },
         ),
@@ -33,3 +71,5 @@ class _passviewState extends State<passview> {
     );
   }
 }
+
+

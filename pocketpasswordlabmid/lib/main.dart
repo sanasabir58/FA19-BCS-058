@@ -9,7 +9,7 @@ import 'package:firebase_database/firebase_database.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(simplepassword());
+  runApp(passview());
 }
 class pocketpassword extends StatefulWidget {
   const pocketpassword({Key? key}) : super(key: key);
