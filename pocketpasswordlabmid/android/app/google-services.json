@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "237162091498",
+    "firebase_url": "https://counting-5b940-default-rtdb.firebaseio.com",
+    "project_id": "counting-5b940",
+    "storage_bucket": "counting-5b940.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237162091498:android:286ccb8297399ec4f3d893",
+        "android_client_info": {
+          "package_name": "com.example.firebasecounter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237162091498-ij0kumf9fdgivp2ts9ascpfh9ckqeu4h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkUAmiiFPoD5OUtiHwzM-g-aryMyKvX1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237162091498-ij0kumf9fdgivp2ts9ascpfh9ckqeu4h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:237162091498:android:298fe432656ecb88f3d893",
+        "android_client_info": {
+          "package_name": "com.example.pocketpasswordlabmid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "237162091498-ij0kumf9fdgivp2ts9ascpfh9ckqeu4h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkUAmiiFPoD5OUtiHwzM-g-aryMyKvX1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "237162091498-ij0kumf9fdgivp2ts9ascpfh9ckqeu4h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
