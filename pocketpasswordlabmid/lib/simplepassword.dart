@@ -1,5 +1,6 @@
 import 'dart:math';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class simplepassword extends StatefulWidget {
@@ -62,7 +63,15 @@ class _simplepasswordState extends State<simplepassword> {
                         text.text=password;
 
                       }, child: Text("Generate Password"),),
-                      ElevatedButton(onPressed: (){}, child: Text("save"),),
+                      ElevatedButton(
+                        onPressed: ()async{
+                          await FirebaseFirestore.instance.collection('pocketpassword').add(
+                            {
+                              'password':text.text,
+                            });
+                        },
+                        child: Text("save"),
+                      ),
         ]),
 
             ),),
