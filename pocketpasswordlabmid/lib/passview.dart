@@ -10,15 +10,13 @@ class passview extends StatefulWidget {
 }
 
 class _passviewState extends State<passview> {
-  var firebasedb =
-      FirebaseFirestore.instance.collection("pocketpassword").snapshots();
+  var firebasedb = FirebaseFirestore.instance.collection("pocketpassword").snapshots();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return  Scaffold(
         appBar: AppBar(
-          title: Text("Simple Password"),
+          title: Text("View Password"),
           backgroundColor: Colors.purple,
           centerTitle: true,
         ),
@@ -34,14 +32,13 @@ class _passviewState extends State<passview> {
                 });
           },
         ),
-      ),
-    );
+      );
+
   }
 }
 
 class Cardlist extends StatelessWidget {
   Cardlist({required this.querySnapshot, required this.index});
-
   final QuerySnapshot querySnapshot;
   final int index;
 

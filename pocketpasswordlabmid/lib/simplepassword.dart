@@ -20,8 +20,6 @@ class _simplepasswordState extends State<simplepassword> {
     Random random = Random();
     num= String.fromCharCodes(Iterable.generate(4, (_) => number.codeUnitAt(random.nextInt(number.length))));
     char= String.fromCharCodes(Iterable.generate(4, (_) => characters.codeUnitAt(random.nextInt(characters.length))));
-
-
     return num+char;
     //final len=8;
     //final Lowercaseletter = "abcdefghijklmnopqrstuvwxyz";
@@ -37,8 +35,7 @@ class _simplepasswordState extends State<simplepassword> {
   }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return  Scaffold(
         appBar: AppBar(title: Text("Simple Password"),
           backgroundColor: Colors.purple,
           centerTitle: true,
@@ -78,7 +75,7 @@ class _simplepasswordState extends State<simplepassword> {
             ),
           ],
         ),
-      ),
-    );
+      );
+
   }
 }
