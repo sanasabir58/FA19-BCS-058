@@ -58,13 +58,27 @@ class _simplepasswordState extends State<simplepassword> {
                             validator: (val)=>val==""?val:null,
             ),
           ),
+                      SizedBox(
+                        height: 5.0,
+                      ),
                    Text('Hint: 1234sana'),
-                   SizedBox(height: 10.0,),
+                      SizedBox(
+                     height: 10.0,),
                       ElevatedButton(onPressed: (){
                         final password=generatepassword();
-                        text.text=password;
-
-                      }, child: Text("Generate Password"),),
+                        text.text=password;},
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.purple,
+                          elevation: 10.0, // Elevation
+                          shadowColor: Colors.purpleAccent,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0),
+                          ),
+                        ),
+                        child: Text("Generate Password"),),
+                      SizedBox(
+                        height: 10.0,
+                      ),
                       ElevatedButton(
                         onPressed: ()async{
                           await FirebaseFirestore.instance.collection('pocketpassword').add(
@@ -72,7 +86,15 @@ class _simplepasswordState extends State<simplepassword> {
                               'password':text.text,
                             });
                         },
-                        child: Text("save"),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.purple,
+                          elevation: 10.0, // Elevation
+                          shadowColor: Colors.purpleAccent,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0),
+                          ),
+                        ),
+                        child: Text("Save"),
                       ),
         ]),
 

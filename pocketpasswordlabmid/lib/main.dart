@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pocketpasswordlabmid/passview.dart';
 import 'package:pocketpasswordlabmid/simplepassword.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:pocketpasswordlabmid/toughpassword.dart';
+import 'package:splash_screen_view/SplashScreenView.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home:pocketpassword(),
+    home:splash(),
   ));
 }
 class pocketpassword extends StatefulWidget {
@@ -46,9 +46,9 @@ class _pocketpasswordState extends State<pocketpassword> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage('images/ss.jpg'),
+                    backgroundImage: AssetImage('images/s2.jpg'),
                     radius: 70.0,
-                    backgroundColor: Colors.purple,
+                    backgroundColor: Colors.white,
                   ),
                   SizedBox(
                     height: 10,
@@ -102,5 +102,27 @@ class _pocketpasswordState extends State<pocketpassword> {
 
   }
 }
+class splash extends StatelessWidget {
+  const splash({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SplashScreenView(
+        navigateRoute: pocketpassword(),
+        duration: 3000,
+        imageSize: 130,
+        imageSrc: "images/s2.jpg",
+        text: "WellCome to PocketPassword Dairy",
+        textType: TextType.ScaleAnimatedText,
+        textStyle: TextStyle(
+          fontSize: 30.0,
+        ),
+        backgroundColor: Colors.white,
+      ),
+    );
+  }
+}
+
 
 

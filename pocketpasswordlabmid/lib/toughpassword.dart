@@ -55,7 +55,7 @@ class _toughpasswordState extends State<toughpassword> {
                 child: Form(
                   child:Flex(direction: Axis.vertical,
                     children: [
-                      ListTile(leading: Icon(Icons.edit_location_outlined),
+                      ListTile(
                         title: TextFormField(
                           controller: lenght,
                           keyboardType: TextInputType.number,
@@ -63,7 +63,7 @@ class _toughpasswordState extends State<toughpassword> {
                         ),
                       ),
                       Text('Enter Lenght of password'),
-                      ListTile(leading: Icon(Icons.edit_location_outlined),
+                      ListTile(
                         title: TextFormField(
                           controller: lenghtcharacter,
                           keyboardType: TextInputType.number,
@@ -71,7 +71,7 @@ class _toughpasswordState extends State<toughpassword> {
                         ),
                       ),
                       Text('Enter how many character in password'),
-                      ListTile(leading: Icon(Icons.edit_location_outlined),
+                      ListTile(
                         title: TextFormField(
                           controller: lenghtdigit,
                           keyboardType: TextInputType.number,
@@ -79,7 +79,7 @@ class _toughpasswordState extends State<toughpassword> {
                         ),
                       ),
                       Text('Enter how many digits in password'),
-                      ListTile(leading: Icon(Icons.edit_location_outlined),
+                      ListTile(
                         title: TextFormField(
                           controller: lenghtsymbol,
                           keyboardType: TextInputType.number,
@@ -87,14 +87,14 @@ class _toughpasswordState extends State<toughpassword> {
                         ),
                       ),
                       Text('Enter how many symbols in password'),
-                      ListTile(leading: Icon(Icons.password),
+                      ListTile(
                         title: TextFormField(
                           controller: lenghtpossword,
                           keyboardType: TextInputType.number,
                           validator: (val)=>val==""?val:null,
                         ),
                       ),
-                      Text('Hint: 1234sana'),
+                      Text('Hint: 1234sana**'),
                       SizedBox(height: 10.0,),
                       ElevatedButton(onPressed: (){
                         int len=int.parse(lenght.text);
@@ -104,12 +104,29 @@ class _toughpasswordState extends State<toughpassword> {
                         final password=generatepassword(len, charlen, digitlen, symbolen);
                         lenghtpossword.text=password;
                       },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.purple,
+                          elevation: 10.0, // Elevation
+                          shadowColor: Colors.purpleAccent,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0),
+                          ),
+                        ),
                         child: Text("generate Password"),),
                       ElevatedButton(onPressed: ()async{
                         await FirebaseFirestore.instance.collection('pocketpassword').add({
                           "password":lenghtpossword.text,
                         });
-                      }, child: Text("save"),),
+                      },
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.purple,
+                          elevation: 10.0, // Elevation
+                          shadowColor: Colors.purpleAccent,
+                          shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(30.0),
+                          ),
+                        ),
+                        child: Text("Save"),),
                     ]),
 
                 ),),
