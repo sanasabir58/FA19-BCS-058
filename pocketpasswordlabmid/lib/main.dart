@@ -26,12 +26,13 @@ class _pocketpasswordState extends State<pocketpassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey.shade100,
         appBar: AppBar(
           actions: [
             CircleAvatar(
               backgroundImage: AssetImage('images/s2.jpg'),
               radius: 20.0,
-              backgroundColor: Colors.white,),
+              backgroundColor: Colors.blueGrey.shade100,),
           ],
           title: Text("Pocket Password Dairy"),
           backgroundColor: Colors.purple,
@@ -47,8 +48,8 @@ class _pocketpasswordState extends State<pocketpassword> {
                 children: [
                   CircleAvatar(
                     backgroundImage: AssetImage('images/s2.jpg'),
-                    radius: 70.0,
                     backgroundColor: Colors.white,
+                    radius: 70.0,
                   ),
                   SizedBox(
                     height: 10,
@@ -108,6 +109,7 @@ class splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey.shade100,
       body: SplashScreenView(
         navigateRoute: pocketpassword(),
         duration: 3000,
@@ -118,7 +120,6 @@ class splash extends StatelessWidget {
         textStyle: TextStyle(
           fontSize: 30.0,
         ),
-        backgroundColor: Colors.white,
       ),
     );
   }

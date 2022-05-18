@@ -21,21 +21,12 @@ class _simplepasswordState extends State<simplepassword> {
     num= String.fromCharCodes(Iterable.generate(4, (_) => number.codeUnitAt(random.nextInt(number.length))));
     char= String.fromCharCodes(Iterable.generate(4, (_) => characters.codeUnitAt(random.nextInt(characters.length))));
     return num+char;
-    //final len=8;
-    //final Lowercaseletter = "abcdefghijklmnopqrstuvwxyz";
-    //final n="0123456789";
-    //String chars ='';
-     //chars +="$Lowercaseletter";
-    //chars +="$n";
-
-     //return List.generate(len, (index){
-       //final indexrandom=Random.secure().nextInt(chars.length);
-       //return chars[indexrandom];
 
   }
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: Colors.blueGrey.shade100,
         appBar: AppBar(
           actions: [CircleAvatar(
             backgroundImage: AssetImage('images/s2.jpg'),

@@ -37,6 +37,7 @@ class _toughpasswordState extends State<toughpassword> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: Colors.blueGrey.shade100,
       resizeToAvoidBottomInset: false,
         appBar: AppBar(
           actions: [CircleAvatar(
@@ -49,7 +50,7 @@ class _toughpasswordState extends State<toughpassword> {
         ),
         body: Column(
           children: [
-            Flexible(
+            Flexible (
               flex: 0,
               child: Center(
                 child: Form(

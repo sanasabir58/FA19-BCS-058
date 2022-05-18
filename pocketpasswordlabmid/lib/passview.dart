@@ -14,6 +14,7 @@ class _passviewState extends State<passview> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      backgroundColor: Colors.blueGrey.shade100,
         appBar: AppBar(
           actions: [
             CircleAvatar(
