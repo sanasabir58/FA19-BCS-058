@@ -138,14 +138,16 @@ class _SimplePasswordScreenState extends State<SimplePasswordScreen> {
                 ),
               ],
             ),
-            Container(
-              margin: EdgeInsets.only(top: 100),
-              height: 200,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/simple.png"),
-                    fit: BoxFit.fitHeight,
-                  )
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(top: 100),
+                height: 200,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage("assets/simple.png"),
+                      fit: BoxFit.fitHeight,
+                    )
+                ),
               ),
             ),
           ],
