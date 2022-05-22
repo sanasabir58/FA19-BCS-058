@@ -193,10 +193,29 @@ class CustomCard extends StatelessWidget {
                 Icons.edit,
                 color: Colors.green,
               ),),
-              IconButton(onPressed: () async{
-                  var FirebaseReference=FirebaseFirestore.instance.collection('PasswordBD');
-                  await FirebaseReference.doc(docId).delete();
+              IconButton(onPressed: () {
+                   showDialog(
+                    context: context,
+                    builder:(BuildContext context){
+                      return AlertDialog(
+                        title: Text('Are You sure!'),
+                        actions: [
+                          TextButton(onPressed: () async {
+                            final uid=await getuserid();
+                            var FirebaseReference=FirebaseFirestore.instance.collection('PasswordBD').doc(uid).collection("password");
+                            await FirebaseReference.doc(docId).delete();
+                            Navigator.of(context).pop();
+                          }, child: Text('Yes',style: TextStyle(color: Colors.pink),),
+                          ),
+                          TextButton(onPressed: (){
+                            Navigator.of(context).pop();
+                          }, child: Text('No',style: TextStyle(color: Colors.blue),),
+                          ),
+                        ],
 
+                      );
+                    },
+                  );
                 },
                icon: Icon(
                 Icons.delete,
@@ -209,6 +228,30 @@ class CustomCard extends StatelessWidget {
     );
   }
 }
+// AlertDialog(
+// actions: [
+// TextButton(
+// onPressed: () {
+// if(pass.text.isNotEmpty){
+// final uid=await getuserid();
+//                   var FirebaseReference=FirebaseFirestore.instance.collection('PasswordBD').doc(uid).collection("password");
+//                   await FirebaseReference.doc(docId).delete();
+// }).then((value) {
+// Navigator.pop(context);
+// });
+// }
+// },
+// child: Text('Ok', style: TextStyle(color: Colors.pink),),
+// ),
+// TextButton(
+// onPressed: (){
+//
+// Navigator.of(context).pop();
+// },
+// child: Text('No', style: TextStyle(color: Colors.blue),),
+// ),
+// ],
+// );
 
 
 
