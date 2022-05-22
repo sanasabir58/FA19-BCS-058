@@ -1,7 +1,9 @@
 
 
+import 'package:clipboard/clipboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:pocket_password/Authication/Method.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ViewPasswordScreen extends StatefulWidget {
@@ -12,7 +14,7 @@ class ViewPasswordScreen extends StatefulWidget {
 }
 
 class _ViewPasswordScreenState extends State<ViewPasswordScreen> {
-  var firebaseDB=FirebaseFirestore.instance.collection("PasswordBD").snapshots();
+  
   bool eyeVisibily=true;
 
 
@@ -24,13 +26,19 @@ class _ViewPasswordScreenState extends State<ViewPasswordScreen> {
         backgroundColor: Colors.blue,
         actions: [
           IconButton(
+            onPressed: (){
+
+            },
+            icon: Icon(Icons.search),
+          ),
+          IconButton(
             onPressed: (){},
-            icon: Icon(Icons.download_rounded),
+            icon: Icon(Icons.download),
           ),
         ],
       ),
       body: StreamBuilder(
-        stream: firebaseDB,
+        stream: getUserData(context),
         builder: (context,AsyncSnapshot snapshot){
           if(!snapshot.hasData)return Center(child: CircularProgressIndicator());
           return ListView.builder(
@@ -54,6 +62,14 @@ class _ViewPasswordScreenState extends State<ViewPasswordScreen> {
       );
   }
 }
+
+
+
+
+Stream<QuerySnapshot> getUserData(BuildContext context)async*{
+  final uid=await getuserid();
+  yield* FirebaseFirestore.instance.collection("PasswordBD").doc(uid).collection("password").snapshots();
+}
 class CustomCard extends StatelessWidget {
 
   CustomCard({required this.snapshot,required this.index,required this.icon,required this.onpressed,required this.passvisibiliy});
@@ -71,6 +87,7 @@ class CustomCard extends StatelessWidget {
       elevation: 6.0,
       child: Column(
         children: [
+
           ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.blue.shade400,
@@ -114,7 +131,13 @@ class CustomCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
-                onPressed: (){},
+                onPressed: (){
+                  FlutterClipboard.copy(snapshot.docs[index]['password']).then(( value ) => print('copied'));
+                  const snackBar = SnackBar(
+                    content: Text('Data copied'),
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
                 icon: Icon(Icons.copy,color: Colors.lightBlue,),
               ),
               IconButton(
@@ -127,6 +150,7 @@ class CustomCard extends StatelessWidget {
               ),
               IconButton(
                 onPressed: ()async{
+                  final uid=await getuserid();
                   await showDialog(
                     context: context,
                     builder: (BuildContext context) {
@@ -145,7 +169,7 @@ class CustomCard extends StatelessWidget {
                           TextButton(
                             onPressed: () {
                              if(pass.text.isNotEmpty){
-                               FirebaseFirestore.instance.collection('PasswordBD').doc(docId).update({
+                               FirebaseFirestore.instance.collection('PasswordBD').doc(uid).collection("password").doc(docId).update({
                                  "password":pass.text,
                                }).then((value) {
                                  Navigator.pop(context);
