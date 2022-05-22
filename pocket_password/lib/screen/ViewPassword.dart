@@ -4,6 +4,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:pocket_password/Authication/Method.dart';
+import 'package:pocket_password/loadingworking/spinkit.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ViewPasswordScreen extends StatefulWidget {
@@ -40,7 +41,7 @@ class _ViewPasswordScreenState extends State<ViewPasswordScreen> {
       body: StreamBuilder(
         stream: getUserData(context),
         builder: (context,AsyncSnapshot snapshot){
-          if(!snapshot.hasData)return Center(child: CircularProgressIndicator());
+          if(!snapshot.hasData)return Center(child: spinkit);
           return ListView.builder(
             itemCount: snapshot.data.docs.length,
               itemBuilder: (context, int index)
@@ -228,30 +229,7 @@ class CustomCard extends StatelessWidget {
     );
   }
 }
-// AlertDialog(
-// actions: [
-// TextButton(
-// onPressed: () {
-// if(pass.text.isNotEmpty){
-// final uid=await getuserid();
-//                   var FirebaseReference=FirebaseFirestore.instance.collection('PasswordBD').doc(uid).collection("password");
-//                   await FirebaseReference.doc(docId).delete();
-// }).then((value) {
-// Navigator.pop(context);
-// });
-// }
-// },
-// child: Text('Ok', style: TextStyle(color: Colors.pink),),
-// ),
-// TextButton(
-// onPressed: (){
-//
-// Navigator.of(context).pop();
-// },
-// child: Text('No', style: TextStyle(color: Colors.blue),),
-// ),
-// ],
-// );
+
 
 
 
