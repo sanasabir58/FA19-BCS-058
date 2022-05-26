@@ -23,6 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   bool passVisibility=true;
   @override
 
+
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -65,8 +66,11 @@ class _LoginPageState extends State<LoginPage> {
                     hintStyle: TextStyle(color: Colors.grey),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
-                    )),
+                    ),
+                ),
+
               ),
+
             ),
             SizedBox(
               height: 20.0,
@@ -107,7 +111,11 @@ class _LoginPageState extends State<LoginPage> {
                         setState(() {
                           isloading=false;
                         });
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DashBoard()));
+                        _email.clear();
+                        _password.clear();
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DashBoard()));
+
+
                       }else{
                         print("Login Failed");
                         setState(() {

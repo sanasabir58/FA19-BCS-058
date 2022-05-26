@@ -3,6 +3,7 @@ import 'package:pocket_password/Authication/Method.dart';
 import 'package:pocket_password/screen/ToughPasswordScreen.dart';
 import 'package:pocket_password/screen/ViewPassword.dart';
 import 'package:pocket_password/screen/aboutpage.dart';
+import 'package:pocket_password/screen/custompasswordscreen.dart';
 import 'package:pocket_password/screen/simplePasswordScreen.dart';
 
 class DashBoard extends StatelessWidget {
@@ -16,7 +17,7 @@ class DashBoard extends StatelessWidget {
         title: Text("Pocket Password App"),
         backgroundColor: Colors.blue,
         actions: [
-          IconButton(onPressed: (){logout(context);}, icon: Icon(Icons.logout),),
+          IconButton(onPressed: (){}, icon: Icon(Icons.account_circle),),
         ],
       ),
       drawer: Drawer(
@@ -107,6 +108,15 @@ class DashBoard extends StatelessWidget {
                    height: 15.0,
                  ),
                  OptionButton(
+                   text: "Custom Password",
+                   onpressed: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>custompasswordscreen()));
+                   },
+                 ),
+                 SizedBox(
+                   height: 15.0,
+                 ),
+                 OptionButton(
                    text: "Show All Password",
                    onpressed: (){
                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewPasswordScreen()));
@@ -139,6 +149,7 @@ class OptionButton extends StatelessWidget {
         shadowColor: Colors.blue,
         primary: Colors.blue.shade400,
         padding: EdgeInsets.fromLTRB(20, 30, 20, 30),
+        side: BorderSide(width: 3,color: Colors.white),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),

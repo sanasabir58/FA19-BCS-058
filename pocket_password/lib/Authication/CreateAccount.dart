@@ -148,7 +148,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             isloading=false;
                           });
                           print("Signup successfully");
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+                          _email.clear();
+                          _password.clear();
+                          _username.clear();
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginPage()));
                           const snackBar = SnackBar(
                             content: Text('Create Account Successfully'),
                           );

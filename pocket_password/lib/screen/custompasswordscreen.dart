@@ -3,32 +3,31 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pocket_password/Authication/Method.dart';
+import 'package:pocket_password/loadingworking/spinkit.dart';
 
-import '../loadingworking/spinkit.dart';
-
-class SimplePasswordScreen extends StatefulWidget {
-  const SimplePasswordScreen({Key? key}) : super(key: key);
+class custompasswordscreen extends StatefulWidget {
+  const custompasswordscreen({Key? key}) : super(key: key);
 
   @override
-  _SimplePasswordScreenState createState() => _SimplePasswordScreenState();
+  _custompasswordscreenState createState() => _custompasswordscreenState();
 }
 
-class _SimplePasswordScreenState extends State<SimplePasswordScreen> {
+class _custompasswordscreenState extends State<custompasswordscreen> {
   TextEditingController GeneratePassword=new TextEditingController();
   TextEditingController text=new TextEditingController();
   bool isloading=false;
-  String passworda()
-  {
-    const characters = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
-    Random random = Random();
-    String a= String.fromCharCodes(Iterable.generate(4, (_) => characters.codeUnitAt(random.nextInt(characters.length))));
-    const number = '0123456789';
-    Random rand = Random();
-    String b= String.fromCharCodes(Iterable.generate(4, (_) => number.codeUnitAt(rand.nextInt(number.length))));
-    return a+b;
-
-
-  }
+  // String passworda()
+  // {
+  //   const characters = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
+  //   Random random = Random();
+  //   String a= String.fromCharCodes(Iterable.generate(4, (_) => characters.codeUnitAt(random.nextInt(characters.length))));
+  //   const number = '0123456789';
+  //   Random rand = Random();
+  //   String b= String.fromCharCodes(Iterable.generate(4, (_) => number.codeUnitAt(rand.nextInt(number.length))));
+  //   return a+b;
+  //
+  //
+  // }
   // String GeneratePassword(){
   //   final Lenght=4;
   //   final UpperCaseletter="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -44,7 +43,7 @@ class _SimplePasswordScreenState extends State<SimplePasswordScreen> {
   //
   //
   // }
-  bool check=false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,10 +57,9 @@ class _SimplePasswordScreenState extends State<SimplePasswordScreen> {
         child: Column(
           children: [
             TextField(
-
               controller: text,
               decoration: InputDecoration(
-                label: Text("Enter name of password"),
+                  label: Text("Enter name of password"),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.blue,
                         width: 2.0),
@@ -79,46 +77,44 @@ class _SimplePasswordScreenState extends State<SimplePasswordScreen> {
             TextField(
 
               controller: GeneratePassword,
-              readOnly: true,
+              // readOnly: true,
               decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blue,
-                  width: 2.0),
-                ),
-                hintText: "Password Like: abcd1234",
-                icon: Icon(
-                  Icons.password,
-                  color: Colors.blue,
-                )
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.blue,
+                        width: 2.0),
+                  ),
+                  hintText: "Password",
+                  icon: Icon(
+                    Icons.password,
+                    color: Colors.blue,
+                  )
               ),
             ),
             SizedBox(
               height: 20.0,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // ElevatedButton(
+                //   onPressed: (){
+                //     setState(() {
+                //       check=true;
+                //     });
+                //     // final pass=passworda();
+                //     // GeneratePassword.text=pass;
+                //
+                //   },
+                //   child: Text("Create Password"),
+                //   style: ElevatedButton.styleFrom(
+                //     primary: Colors.blue,
+                //   ),
+                // ),
+                // SizedBox(
+                //   width: 10.0,
+                // ),
                 ElevatedButton(
-                  onPressed: (){
-                    setState(() {
-                      check=true;
-                    });
-                    final pass=passworda();
-                    GeneratePassword.text=pass;
-
-                  },
-                  child: Text("Create Password"),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                    padding: EdgeInsets.all(15),
-                    primary: Colors.blue,
-                  ),
-                ),
-                SizedBox(
-                  width: 10.0,
-                ),
-                ElevatedButton(
-                  onPressed: check==false?null:()async{
+                  onPressed:()async{
                     if(text.text.isNotEmpty&&GeneratePassword.text.isNotEmpty){
                       setState(() {
                         isloading=true;
@@ -130,23 +126,19 @@ class _SimplePasswordScreenState extends State<SimplePasswordScreen> {
                       }).then((value) {
                         print(value.id);
                         setState(() {
-                          check=false;
                           isloading=false;
-                          const snackBar = SnackBar(
-                            content: Text('Data Save Successfully'),
-
-                          );
-
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                          text.clear();
-                          GeneratePassword.clear();
-
                         });
+                        text.clear();
+                        GeneratePassword.clear();
+
+                        const snackBar = SnackBar(
+                          content: Text('Data Save Successfully'),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
 
                       }).catchError((error){
                         print(error);
-
-
                       });
                     }
                     else{
@@ -154,8 +146,8 @@ class _SimplePasswordScreenState extends State<SimplePasswordScreen> {
                         content: Text('Please fill all feild'),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    }
 
+                    }
 
                   },
                   child: Text("Save Password"),
