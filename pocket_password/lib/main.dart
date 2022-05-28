@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'ChatApp',
+      title: 'PocketPassword',
       theme: ThemeData(
 
         primarySwatch: Colors.blue,

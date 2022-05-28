@@ -139,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
-                    )
+                    ),
                 ),
               ),
             ),
@@ -170,7 +170,7 @@ class _LoginPageState extends State<LoginPage> {
                   image: DecorationImage(
                     image: AssetImage("assets/background.png"),
                     fit: BoxFit.fitHeight,
-                  )
+                  ),
                 ),
               ),
             ),
