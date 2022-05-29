@@ -36,7 +36,11 @@ class _SignUpPageState extends State<SignUpPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              SizedBox(
+                height: 40.0,
+              ),
               Center(
+
                 child: Text(
                   "Wellcome",
                   style: TextStyle(
@@ -57,7 +61,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
               SizedBox(
-                height: 80.0,
+                height: 60.0,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),

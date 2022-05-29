@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:pocket_password/Authication/CreateAccount.dart';
 import 'package:pocket_password/Authication/Method.dart';
+import 'package:pocket_password/Authication/resetpassword.dart';
 import 'package:pocket_password/screen/DashBoard.dart';
 import 'package:pocket_password/screen/Wellcomepage.dart';
 
@@ -28,11 +29,15 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SafeArea(
-        child: isloading?Center(child: spinkit,):Column(
+        child: isloading?Center(child: spinkit,):AutofillGroup(child:
+        Column(
 
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            SizedBox(
+              height: 40.0,
+            ),
             Center(
               child: Text(
                 "Wellcome",
@@ -54,11 +59,12 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(
-              height: 80.0,
+              height: 60.0,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
+                autofillHints: [AutofillHints.email],
                 controller: _email,
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.email),
@@ -68,7 +74,6 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                 ),
-
               ),
 
             ),
@@ -78,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: TextField(
+                autofillHints: [AutofillHints.password],
                 controller: _password,
                 obscureText: passVisibility,
                 decoration: InputDecoration(
@@ -162,6 +168,32 @@ class _LoginPageState extends State<LoginPage> {
                 )
               ],
             ),
+            SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>resetpassword()));
+                    },
+                    child: Text('Forget Password?',style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      // fontStyle: FontStyle.italic,
+                      decoration: TextDecoration.underline,
+                      fontSize: 16.0,
+
+
+                    ),),
+
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: Container(
                 margin: EdgeInsets.only(top: 100),
@@ -175,6 +207,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ],
+        ),
         ),
       ),
     );
