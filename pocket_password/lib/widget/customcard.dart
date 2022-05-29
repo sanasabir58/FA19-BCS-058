@@ -7,12 +7,12 @@ import '../Authication/Method.dart';
 
 class CustomCard extends StatelessWidget {
 
-  CustomCard({required this.snapshot,required this.index,required this.icon,required this.onpressed,required this.passvisibiliy});
+  CustomCard({required this.snapshot,required this.index,required this.passvisibiliy});
   final QuerySnapshot snapshot;
   final int index;
-  final IconData icon;
+
   final bool passvisibiliy;
-  final VoidCallback onpressed;
+
   @override
   Widget build(BuildContext context) {
 
@@ -49,11 +49,6 @@ class CustomCard extends StatelessWidget {
                     Text(passvisibiliy?"**********":"${snapshot.docs[index]['password']}",
                       style: TextStyle(color: Colors.grey),),
                   ],
-                ),
-                IconButton(onPressed: onpressed, icon: Icon(
-                  icon,),
-                  iconSize: 30,
-                  color: Colors.lightBlue,
                 ),
                 // Text("${snapshot.docs[index]['name']}",style: TextStyle(
                 //     fontWeight: FontWeight.w500
