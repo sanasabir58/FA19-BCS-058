@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pocket_password/Authication/Method.dart';
+import 'package:pocket_password/encrypt_decrypt/AES.dart';
 
 import '../loadingworking/spinkit.dart';
 
@@ -119,6 +120,8 @@ class _SimplePasswordScreenState extends State<SimplePasswordScreen> {
                 ),
                 ElevatedButton(
                   onPressed: check==false?null:()async{
+                    // EncryptData.encryptAES(GeneratePassword.text);
+                    // print('${EncryptData.encrypted!.base64}');
                     if(text.text.isNotEmpty&&GeneratePassword.text.isNotEmpty){
                       setState(() {
                         isloading=true;
@@ -126,6 +129,7 @@ class _SimplePasswordScreenState extends State<SimplePasswordScreen> {
                       final uid=await getuserid();
                       await FirebaseFirestore.instance.collection("PasswordBD").doc(uid).collection("password").add({
                         'password':GeneratePassword.text,
+                        // EncryptData.encrypted!.base64,
                         'name':text.text,
                       }).then((value) {
                         print(value.id);

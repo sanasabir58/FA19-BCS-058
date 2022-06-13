@@ -44,6 +44,8 @@ dependencies:
   syncfusion_flutter_pdf: ^20.1.57-beta
   path_provider: ^2.0.10
   open_file: ^3.2.1
+  pdf: ^3.8.1
+  encrypt: ^5.0.1
 
 
 

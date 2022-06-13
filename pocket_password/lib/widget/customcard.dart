@@ -19,6 +19,7 @@ class CustomCard extends StatelessWidget {
     var docId=snapshot.docs[index].id;
     TextEditingController pass=new TextEditingController(text: snapshot.docs[index]['password']);
     return Card(
+
       elevation: 6.0,
       child: Column(
         children: [
@@ -46,7 +47,8 @@ class CustomCard extends StatelessWidget {
                     SizedBox(
                       height: 7.0,
                     ),
-                    Text(passvisibiliy?"**********":"${snapshot.docs[index]['password']}",
+                    Text(passvisibiliy?"**********"
+                        :"${snapshot.docs[index]['password']}",
                       style: TextStyle(color: Colors.grey),),
                   ],
                 ),
