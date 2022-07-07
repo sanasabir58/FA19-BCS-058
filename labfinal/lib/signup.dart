@@ -9,6 +9,13 @@ class signup extends StatefulWidget {
 }
 
 class _signupState extends State<signup> {
+  TextEditingController _email= TextEditingController();
+  TextEditingController _password=TextEditingController();
+  final _form = GlobalKey<FormState>();
+  bool emailValidation(String e){
+    bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(e);
+    return emailValid;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +31,7 @@ class _signupState extends State<signup> {
              ),
            ),
            child:Form(
+             key: _form,
              child:  Column(
                mainAxisAlignment: MainAxisAlignment.center,
                crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -63,6 +71,13 @@ class _signupState extends State<signup> {
                  SizedBox(height: 20.0,),
                  Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                    child: TextFormField(
+                     controller: _email,
+                     validator:(value){
+                       if(!emailValidation(value!)||value.isEmpty){
+                         return "Please enter valid email adddress";
+                       }
+                       return null;
+                     },
                      decoration: InputDecoration(
                        hintText: 'Enter Your E-mail',
                        hintStyle: TextStyle(color: Colors.blue),
@@ -71,7 +86,15 @@ class _signupState extends State<signup> {
                    ),),
                  SizedBox(height: 20.0,),
                  Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
-                   child: TextFormField( decoration: InputDecoration(
+                   child: TextFormField(
+                     controller: _password,
+                     validator: (value){
+                       if(value!.isEmpty||value.length<7){
+                         return "Please enter at least 7 character";
+                       }
+                       return null;
+                     },
+                     decoration: InputDecoration(
                      hintText: 'Enter Your Password',
                      hintStyle: TextStyle(color: Colors.blue),
                    ),
@@ -90,6 +113,10 @@ class _signupState extends State<signup> {
                      ),),
                      color: Colors.blue,
                      onPressed: () {
+                       // if(!_form.currentState!.validate()){
+                       //   return;
+                       // }
+
                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>loginpage()));
                      },
                      enabled: true,

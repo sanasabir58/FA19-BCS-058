@@ -2,7 +2,9 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:labfinal/loginpage.dart';
-import 'package:labfinal/signup.dart';
+import 'package:labfinal/loginpages/student%20login.dart';
+import 'package:labfinal/loginpages/teacherlogin.dart';
+
 void main(){
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -56,7 +58,7 @@ class Myapp extends StatelessWidget {
                   ),
                   color: Colors.blue,
                   onPressed: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>loginpage()));
                   },
                   enabled: true,
                   shadowDegree: ShadowDegree.dark,
@@ -88,7 +90,9 @@ class Myapp extends StatelessWidget {
                     ],
                   ),
                   color: Colors.blue,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>teacherlogin()));
+                  },
                   enabled: true,
                   shadowDegree: ShadowDegree.dark,
                 ),
@@ -119,7 +123,9 @@ class Myapp extends StatelessWidget {
                     ],
                   ),
                   color: Colors.blue,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>studentlogin()));
+                  },
                   enabled: true,
                   shadowDegree: ShadowDegree.dark,
                 ),
