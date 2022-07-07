@@ -1,5 +1,6 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:labfinal/managerpages/managerdashboard.dart';
 import 'package:labfinal/signup.dart';
 class loginpage extends StatefulWidget {
   const loginpage({Key? key}) : super(key: key);
@@ -9,6 +10,7 @@ class loginpage extends StatefulWidget {
 }
 
 class _loginpageState extends State<loginpage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +64,9 @@ class _loginpageState extends State<loginpage> {
                   fontWeight: FontWeight.w500,
                 ),),
                 color: Colors.blue,
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>managerdashB()));
+                },
                 enabled: true,
                 shadowDegree: ShadowDegree.dark,
               ),),
