@@ -1,12 +1,15 @@
 import 'package:animated_button/animated_button.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:labfinal/loginpage.dart';
 import 'package:labfinal/loginpages/student%20login.dart';
 import 'package:labfinal/loginpages/teacherlogin.dart';
 
-void main(){
-  runApp(MaterialApp(
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MaterialApp(
     debugShowCheckedModeBanner: false,
     home: Myapp(),
   ));

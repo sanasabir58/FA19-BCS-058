@@ -9,13 +9,14 @@ class addteacher extends StatefulWidget {
 }
 
 class _addteacherState extends State<addteacher> {
-  // TextEditingController _email= TextEditingController();
-  // TextEditingController _password=TextEditingController();
-  // final _form = GlobalKey<FormState>();
-  // bool emailValidation(String e){
-  //   bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(e);
-  //   return emailValid;
-  // }
+  TextEditingController name=new TextEditingController();
+  TextEditingController phone=new TextEditingController();
+  TextEditingController email=new TextEditingController();
+  TextEditingController subject=new TextEditingController();
+  TextEditingController classes=new TextEditingController();
+  TextEditingController pass=new TextEditingController();
+  bool isloading=false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +45,7 @@ class _addteacherState extends State<addteacher> {
                 children: [
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
+                      controller: name,
                       decoration: InputDecoration(
                         hintText: 'Enter Teacher Name',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -51,6 +53,7 @@ class _addteacherState extends State<addteacher> {
                   SizedBox(height: 20.0,),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
+                      controller: phone,
                       decoration: InputDecoration(
                         hintText: 'Enter teacher PhoneNo',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -60,13 +63,7 @@ class _addteacherState extends State<addteacher> {
                   SizedBox(height: 20.0,),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      // controller: _email,
-                      // validator:(value){
-                      //   if(!emailValidation(value!)||value.isEmpty){
-                      //     return "Please enter valid email adddress";
-                      //   }
-                      //   return null;
-                      // },
+                      controller: email,
                       decoration: InputDecoration(
                         hintText: 'Enter teacher E-mail',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -76,13 +73,7 @@ class _addteacherState extends State<addteacher> {
                   SizedBox(height: 20.0,),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      // controller: _password,
-                      // validator: (value){
-                      //   if(value!.isEmpty||value.length<7){
-                      //     return "Please enter at least 7 character";
-                      //   }
-                      //   return null;
-                      // },
+                      controller: subject,
                       decoration: InputDecoration(
                         hintText: 'Enter teacher Subject',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -93,31 +84,18 @@ class _addteacherState extends State<addteacher> {
                   ),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      // controller: _password,
-                      // validator: (value){
-                      //   if(value!.isEmpty||value.length<7){
-                      //     return "Please enter at least 7 character";
-                      //   }
-                      //   return null;
-                      // },
+                      controller: classes,
                       decoration: InputDecoration(
-                        hintText: 'Select teacher Classes',
+                        hintText: 'Enter teacher Class',
                         hintStyle: TextStyle(color: Colors.blue),
                       ),
                     ),),
                   SizedBox(
                     height: 20.0,
                   ),
-
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      // controller: _password,
-                      // validator: (value){
-                      //   if(value!.isEmpty||value.length<7){
-                      //     return "Please enter at least 7 character";
-                      //   }
-                      //   return null;
-                      // },
+                      controller: pass,
                       decoration: InputDecoration(
                         hintText: 'Enter Password for teacher',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -126,6 +104,7 @@ class _addteacherState extends State<addteacher> {
                   SizedBox(
                     height: 20.0,
                   ),
+
                   Padding(
                     padding:const EdgeInsets.symmetric(horizontal: 100),
                     child:  AnimatedButton(
@@ -137,11 +116,7 @@ class _addteacherState extends State<addteacher> {
                       ),),
                       color: Colors.blue,
                       onPressed: () {
-                        // if(!_form.currentState!.validate()){
-                        //   return;
-                        // }
-
-                        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                        if(name.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&subject.text.isNotEmpty&&classes.text.isNotEmpty&&pass.text)
                       },
                       enabled: true,
                       shadowDegree: ShadowDegree.dark,

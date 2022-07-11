@@ -8,6 +8,7 @@ class viewclass extends StatefulWidget {
 }
 
 class _viewclassState extends State<viewclass> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +29,8 @@ class _viewclassState extends State<viewclass> {
             fit: BoxFit.fill,
           ),
         ),
+
+
       ),
     );
   }

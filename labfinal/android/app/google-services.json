@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "496539299279",
+    "project_id": "fees-management-app",
+    "storage_bucket": "fees-management-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496539299279:android:a4b81002523cca57f8f6ba",
+        "android_client_info": {
+          "package_name": "com.example.labfinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496539299279-fsfkqhqthi9ka1sa8o02dkqr043q05bu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl7tzyQPq2EtIzjfPZpNQaxR7V6_oqZJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "496539299279-fsfkqhqthi9ka1sa8o02dkqr043q05bu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
