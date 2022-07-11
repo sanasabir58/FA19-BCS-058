@@ -1,13 +1,16 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
-import 'package:labfinal/managerpages/studentmaintain.dart';
-import 'package:labfinal/managerpages/teachermaintain.dart';
+import 'package:labfinal/managerpages/classes/classM.dart';
+import 'package:labfinal/managerpages/student/studentmaintain.dart';
+import 'package:labfinal/managerpages/teacher/teachermaintain.dart';
+
 class managerdashB extends StatelessWidget {
   const managerdashB({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(
+    return Scaffold(
+      appBar: AppBar(
       backgroundColor: Colors.blue,
       title: Text('DashBoard',
         style: TextStyle(color: Colors.white,fontSize: 20.0,
@@ -145,7 +148,7 @@ class managerdashB extends StatelessWidget {
               ),
               color: Colors.lightBlue,
               onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>classM()));
               },
               enabled: true,
               shadowDegree: ShadowDegree.light,

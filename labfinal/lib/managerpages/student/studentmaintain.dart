@@ -1,5 +1,7 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:labfinal/managerpages/student/addstudent.dart';
+import 'package:labfinal/managerpages/student/viewstudent.dart';
 class studentM extends StatelessWidget {
   const studentM({Key? key}) : super(key: key);
 
@@ -44,7 +46,7 @@ class studentM extends StatelessWidget {
               ),
               color: Colors.white,
               onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>addstudent()));
               },
               enabled: true,
               shadowDegree: ShadowDegree.dark,
@@ -69,7 +71,7 @@ class studentM extends StatelessWidget {
               ),
               color: Colors.white,
               onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>viewstudent()));
               },
               enabled: true,
               shadowDegree: ShadowDegree.dark,

@@ -113,10 +113,9 @@ class _signupState extends State<signup> {
                      ),),
                      color: Colors.blue,
                      onPressed: () {
-                       // if(!_form.currentState!.validate()){
-                       //   return;
-                       // }
-
+                       if(!_form.currentState!.validate()){
+                         return;
+                       }
                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>loginpage()));
                      },
                      enabled: true,
