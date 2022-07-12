@@ -1,6 +1,6 @@
 import 'package:animated_button/animated_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:labfinal/loginpage.dart';
 class addteacher extends StatefulWidget {
   const addteacher({Key? key}) : super(key: key);
 
@@ -9,7 +9,7 @@ class addteacher extends StatefulWidget {
 }
 
 class _addteacherState extends State<addteacher> {
-  TextEditingController name=new TextEditingController();
+  TextEditingController tname=new TextEditingController();
   TextEditingController phone=new TextEditingController();
   TextEditingController email=new TextEditingController();
   TextEditingController subject=new TextEditingController();
@@ -45,7 +45,7 @@ class _addteacherState extends State<addteacher> {
                 children: [
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      controller: name,
+                      controller: tname,
                       decoration: InputDecoration(
                         hintText: 'Enter Teacher Name',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -115,9 +115,41 @@ class _addteacherState extends State<addteacher> {
                         fontWeight: FontWeight.w500,
                       ),),
                       color: Colors.blue,
-                      onPressed: () {
-                        if(name.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&subject.text.isNotEmpty&&classes.text.isNotEmpty&&pass.text)
-                      },
+                      onPressed: () async {
+                        if(tname.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&subject.text.isNotEmpty&&classes.text.isNotEmpty&&pass.text.isNotEmpty)
+                          {
+                            setState(() {
+                              isloading=true;
+                            });
+                            await FirebaseFirestore.instance.collection('teacher').add({'name':tname.text,'phone':phone.text,'email':email.text,'subject':subject.text,
+                            'classes':classes.text,'passwpord':pass.text})
+                              .then((value) {
+                                print(value.id);
+                                setState(() {
+                                isloading=false;
+                          });
+                                tname.clear();
+                                phone.clear();
+                                email.clear();
+                                subject.clear();
+                                classes.clear();
+                                pass.clear();
+                                const snackBar = SnackBar(
+                                  content: Text('Data Save Successfully'),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }).catchError((error){
+                              print(error);
+                            });
+                          }
+                        else{
+                          const snackBar = SnackBar(
+                            content: Text('Please fill all feild'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                        }
+                            },
                       enabled: true,
                       shadowDegree: ShadowDegree.dark,
                     ),),

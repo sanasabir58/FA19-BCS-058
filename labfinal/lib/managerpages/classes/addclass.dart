@@ -39,6 +39,13 @@ class _addclassState extends State<addclass> {
                     hintStyle: TextStyle(color: Colors.blue),
                   ),),),
               SizedBox(height: 20.0,),
+              Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Enter fee',
+                    hintStyle: TextStyle(color: Colors.blue),
+                  ),),),
+              SizedBox(height: 20.0,),
               Padding(
                 padding:const EdgeInsets.symmetric(horizontal: 100),
                 child:  AnimatedButton(

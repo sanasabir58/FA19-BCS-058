@@ -1,4 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:labfinal/weidget/cardweidget.dart';
+
+import '../../spinkit.dart';
+
 class viewteacher extends StatefulWidget {
   const viewteacher({Key? key}) : super(key: key);
 
@@ -7,25 +12,56 @@ class viewteacher extends StatefulWidget {
 }
 
 class _viewteacherState extends State<viewteacher> {
+  String tname = '';
+  Stream<QuerySnapshot> getUserdata() async* {
+    yield* FirebaseFirestore.instance.collection("teacher").snapshots();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text('Add Classes',
-          style: TextStyle(color: Colors.white,fontSize: 20.0,
-              fontWeight: FontWeight.bold),),
+        title: Text(
+          'view Teachers record',
+          style: TextStyle(
+              color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Container(
         height: 700.0,
         width: 700.0,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(
-                'images/f1.jpg'),
+            image: AssetImage('images/f1.jpg'),
             fit: BoxFit.fill,
           ),
+        ),
+        child: StreamBuilder(
+          stream: getUserdata(),
+          builder: (context, AsyncSnapshot snapshot) {
+            if (!snapshot.hasData) return Center(child: spinkit);
+            return ListView.builder(
+                itemCount: snapshot.data.docs.length,
+                itemBuilder: (context, int index) {
+                  if (tname.isEmpty) {
+                    return customcard(
+                      snapshot: snapshot.data,
+                      index: index,
+                    );
+                  }
+                  // if(snapshot.data.docs[index]['name'].toString().toLowerCase().startsWith(tname.toLowerCase())){
+                  //   return customcard(
+                  //     snapshot: snapshot.data,
+                  //     index: index,);
+                  // }
+                  else
+                  {
+                    return Container();
+                  }
+                });
+          },
         ),
       ),
     );

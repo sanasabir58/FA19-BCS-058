@@ -1,6 +1,6 @@
 import 'package:animated_button/animated_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:labfinal/loginpage.dart';
 class addstudent extends StatefulWidget {
   const addstudent({Key? key}) : super(key: key);
 
@@ -9,13 +9,15 @@ class addstudent extends StatefulWidget {
 }
 
 class _addstudentState extends State<addstudent> {
-  // TextEditingController _email= TextEditingController();
-  // TextEditingController _password=TextEditingController();
-  // final _form = GlobalKey<FormState>();
-  // bool emailValidation(String e){
-  //   bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(e);
-  //   return emailValid;
-  // }
+  TextEditingController sname=new TextEditingController();
+  TextEditingController sphone=new TextEditingController();
+  TextEditingController semail=new TextEditingController();
+  TextEditingController ssubject=new TextEditingController();
+  TextEditingController sclasses=new TextEditingController();
+  TextEditingController spass=new TextEditingController();
+  TextEditingController tname=new TextEditingController();
+  bool isloading=false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,6 +46,7 @@ class _addstudentState extends State<addstudent> {
                 children: [
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
+                      controller: sname,
                       decoration: InputDecoration(
                         hintText: 'Enter student Name',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -51,6 +54,7 @@ class _addstudentState extends State<addstudent> {
                   SizedBox(height: 20.0,),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
+                      controller: sphone,
                       decoration: InputDecoration(
                         hintText: 'Enter student PhoneNo',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -60,13 +64,7 @@ class _addstudentState extends State<addstudent> {
                   SizedBox(height: 20.0,),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      // controller: _email,
-                      // validator:(value){
-                      //   if(!emailValidation(value!)||value.isEmpty){
-                      //     return "Please enter valid email adddress";
-                      //   }
-                      //   return null;
-                      // },
+                      controller: semail,
                       decoration: InputDecoration(
                         hintText: 'Enter student E-mail',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -76,13 +74,7 @@ class _addstudentState extends State<addstudent> {
                   SizedBox(height: 20.0,),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      // controller: _password,
-                      // validator: (value){
-                      //   if(value!.isEmpty||value.length<7){
-                      //     return "Please enter at least 7 character";
-                      //   }
-                      //   return null;
-                      // },
+                      controller: ssubject,
                       decoration: InputDecoration(
                         hintText: 'Enter student Subject',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -93,13 +85,8 @@ class _addstudentState extends State<addstudent> {
                   ),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      // controller: _password,
-                      // validator: (value){
-                      //   if(value!.isEmpty||value.length<7){
-                      //     return "Please enter at least 7 character";
-                      //   }
-                      //   return null;
-                      // },
+                      controller: sclasses,
+
                       decoration: InputDecoration(
                         hintText: 'Select student Class',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -108,16 +95,22 @@ class _addstudentState extends State<addstudent> {
                   SizedBox(
                     height: 20.0,
                   ),
-
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      // controller: _password,
-                      // validator: (value){
-                      //   if(value!.isEmpty||value.length<7){
-                      //     return "Please enter at least 7 character";
-                      //   }
-                      //   return null;
-                      // },
+                      controller: tname,
+
+                      decoration: InputDecoration(
+                        hintText: 'Enter teacher name',
+                        hintStyle: TextStyle(color: Colors.blue),
+                      ),
+                    ),),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
+                    child: TextFormField(
+                      controller: spass,
+
                       decoration: InputDecoration(
                         hintText: 'Enter Password for student',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -126,6 +119,7 @@ class _addstudentState extends State<addstudent> {
                   SizedBox(
                     height: 20.0,
                   ),
+
                   Padding(
                     padding:const EdgeInsets.symmetric(horizontal: 100),
                     child:  AnimatedButton(
@@ -136,16 +130,46 @@ class _addstudentState extends State<addstudent> {
                         fontWeight: FontWeight.w500,
                       ),),
                       color: Colors.blue,
-                      onPressed: () {
-                        // if(!_form.currentState!.validate()){
-                        //   return;
-                        // }
+                      onPressed: () async {
+                            if(sname.text.isNotEmpty&&sphone.text.isNotEmpty&&semail.text.isNotEmpty&&ssubject.text.isNotEmpty&&sclasses.text.isNotEmpty&&spass.text.isNotEmpty)
+                          {
+                            setState(() {
+                              isloading=true;
+                            });
+                            await FirebaseFirestore.instance.collection('students').add({'name':sname.text,'phone':sphone.text,'email':semail.text,'subject':ssubject.text,
+                              'classes':sclasses.text,'passwpord':spass.text})
+                                .then((value){
+                                  print(value.id);
+                                  setState(() {
+                                  isloading=false;
+                                  });
+                                  sname.clear();
+                                  sphone.clear();
+                                  semail.clear();
+                                  ssubject.clear();
+                                  sclasses.clear();
+                                  spass.clear();
+                                  const snackBar = SnackBar(
+                                    content: Text('Data Save Successfully'),
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                            }).catchError((error){
+                              print(error);
+                            });
+                          }
+                            else{
+                              const snackBar = SnackBar(
+                                content: Text('Please fill all feild'),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
 
-                        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>loginpage()));
-                      },
+                            }
+                          },
+
                       enabled: true,
                       shadowDegree: ShadowDegree.dark,
-                    ),),
+                           ),
+                    ),
                 ],
               ),
             )),
