@@ -13,6 +13,13 @@ class viewteacher extends StatefulWidget {
 
 class _viewteacherState extends State<viewteacher> {
   String tname = '';
+  String phone = '';
+  String email = '';
+  String subject = '';
+  String classes = '';
+  String pass = '';
+
+
   Stream<QuerySnapshot> getUserdata() async* {
     yield* FirebaseFirestore.instance.collection("teacher").snapshots();
   }
@@ -45,21 +52,14 @@ class _viewteacherState extends State<viewteacher> {
             return ListView.builder(
                 itemCount: snapshot.data.docs.length,
                 itemBuilder: (context, int index) {
-                  if (tname.isEmpty) {
                     return customcard(
                       snapshot: snapshot.data,
                       index: index,
                     );
-                  }
-                  // if(snapshot.data.docs[index]['name'].toString().toLowerCase().startsWith(tname.toLowerCase())){
-                  //   return customcard(
-                  //     snapshot: snapshot.data,
-                  //     index: index,);
-                  // }
-                  else
-                  {
-                    return Container();
-                  }
+
+
+
+
                 });
           },
         ),

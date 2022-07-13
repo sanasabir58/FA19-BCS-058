@@ -9,13 +9,12 @@ class addstudent extends StatefulWidget {
 }
 
 class _addstudentState extends State<addstudent> {
-  TextEditingController sname=new TextEditingController();
-  TextEditingController sphone=new TextEditingController();
-  TextEditingController semail=new TextEditingController();
-  TextEditingController ssubject=new TextEditingController();
-  TextEditingController sclasses=new TextEditingController();
-  TextEditingController spass=new TextEditingController();
-  TextEditingController tname=new TextEditingController();
+  TextEditingController name=new TextEditingController();
+  TextEditingController phone=new TextEditingController();
+  TextEditingController email=new TextEditingController();
+  TextEditingController subject=new TextEditingController();
+  TextEditingController classes=new TextEditingController();
+  TextEditingController pass=new TextEditingController();
   bool isloading=false;
 
   @override
@@ -46,7 +45,7 @@ class _addstudentState extends State<addstudent> {
                 children: [
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      controller: sname,
+                      controller: name,
                       decoration: InputDecoration(
                         hintText: 'Enter student Name',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -54,7 +53,7 @@ class _addstudentState extends State<addstudent> {
                   SizedBox(height: 20.0,),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      controller: sphone,
+                      controller: phone,
                       decoration: InputDecoration(
                         hintText: 'Enter student PhoneNo',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -64,7 +63,7 @@ class _addstudentState extends State<addstudent> {
                   SizedBox(height: 20.0,),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      controller: semail,
+                      controller: email,
                       decoration: InputDecoration(
                         hintText: 'Enter student E-mail',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -74,7 +73,7 @@ class _addstudentState extends State<addstudent> {
                   SizedBox(height: 20.0,),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      controller: ssubject,
+                      controller: subject,
                       decoration: InputDecoration(
                         hintText: 'Enter student Subject',
                         hintStyle: TextStyle(color: Colors.blue),
@@ -85,7 +84,7 @@ class _addstudentState extends State<addstudent> {
                   ),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      controller: sclasses,
+                      controller: classes,
 
                       decoration: InputDecoration(
                         hintText: 'Select student Class',
@@ -97,19 +96,7 @@ class _addstudentState extends State<addstudent> {
                   ),
                   Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
-                      controller: tname,
-
-                      decoration: InputDecoration(
-                        hintText: 'Enter teacher name',
-                        hintStyle: TextStyle(color: Colors.blue),
-                      ),
-                    ),),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: TextFormField(
-                      controller: spass,
+                      controller: pass,
 
                       decoration: InputDecoration(
                         hintText: 'Enter Password for student',
@@ -131,24 +118,24 @@ class _addstudentState extends State<addstudent> {
                       ),),
                       color: Colors.blue,
                       onPressed: () async {
-                            if(sname.text.isNotEmpty&&sphone.text.isNotEmpty&&semail.text.isNotEmpty&&ssubject.text.isNotEmpty&&sclasses.text.isNotEmpty&&spass.text.isNotEmpty)
+                            if(name.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&subject.text.isNotEmpty&&classes.text.isNotEmpty&&pass.text.isNotEmpty)
                           {
                             setState(() {
                               isloading=true;
                             });
-                            await FirebaseFirestore.instance.collection('students').add({'name':sname.text,'phone':sphone.text,'email':semail.text,'subject':ssubject.text,
-                              'classes':sclasses.text,'passwpord':spass.text})
+                            await FirebaseFirestore.instance.collection('students').add({'name':name.text,'phone':phone.text,'email':email.text,'subject':subject.text,
+                              'classes':classes.text,'passwpord':pass.text})
                                 .then((value){
                                   print(value.id);
                                   setState(() {
                                   isloading=false;
                                   });
-                                  sname.clear();
-                                  sphone.clear();
-                                  semail.clear();
-                                  ssubject.clear();
-                                  sclasses.clear();
-                                  spass.clear();
+                                  name.clear();
+                                  phone.clear();
+                                  email.clear();
+                                  subject.clear();
+                                  classes.clear();
+                                  pass.clear();
                                   const snackBar = SnackBar(
                                     content: Text('Data Save Successfully'),
                                   );
