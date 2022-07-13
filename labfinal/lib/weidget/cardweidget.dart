@@ -21,13 +21,15 @@ class customcard extends StatelessWidget {
     // TextEditingController classes=new TextEditingController(text: snapshot.docs[index]['teacher']);
     // TextEditingController pass=new TextEditingController(text: snapshot.docs[index]['teacher']);
     return Card(
+      margin: EdgeInsets.only(top:10.0),
+      color:Colors.lightBlue.shade50 ,
       child: Column(
         children: [
           ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.blue.shade400,
               radius: 25.0,
-              child: Text("${snapshot.docs[index]['tname'][0]}",style: TextStyle(
+              child: Text("${snapshot.docs[index]['name'][0]}",style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0
@@ -38,109 +40,108 @@ class customcard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("${snapshot.docs[index]['tname']}",
+                    Text("Name: ${snapshot.docs[index]['name']}",
                       style: TextStyle(
                           fontWeight: FontWeight.w500
                       ),),
                     SizedBox(
                       height: 7.0,
                     ),
-                    Text("${snapshot.docs[index]['phone']}",
+                    Text("phone: ${snapshot.docs[index]['phone']}",
                       style: TextStyle(color: Colors.grey),),
                     SizedBox(
                       height: 7.0,
                     ),
-                    Text("${snapshot.docs[index]['email']}",
+                    Text("Email: ${snapshot.docs[index]['email']}",
                       style: TextStyle(color: Colors.grey),),
                     SizedBox(
                       height: 7.0,
                     ),
-                    Text("${snapshot.docs[index]['subject']}",
+                    Text("subject: ${snapshot.docs[index]['subject']}",
                       style: TextStyle(color: Colors.grey),),
                     SizedBox(
                       height: 7.0,
                     ),
-                    Text("${snapshot.docs[index]['class']}",
+                    Text("class: ${snapshot.docs[index]['classes']}",
                       style: TextStyle(color: Colors.grey),),
                     SizedBox(
                       height: 7.0,
                     ),
-                    Text("${snapshot.docs[index]['password']}",
+                    Text("password: ${snapshot.docs[index]['passwpord']}",
                       style: TextStyle(color: Colors.grey),),
                   ],
                 ),
               ],
             ),
           ),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.end,
-          //   children: [
-          //
-          //     // IconButton(
-          //     //   onPressed: ()async{
-          //     //     await showDialog(
-          //     //       context: context,
-          //     //       builder: (BuildContext context) {
-          //     //         return AlertDialog(
-          //     //           title: Text('Update Password'),
-          //     //           content: TextField(
-          //     //             controller: pass,
-          //     //             decoration: InputDecoration(
-          //     //                 icon: Icon(
-          //     //                   Icons.password,
-          //     //                   color: Colors.blue,
-          //     //                 )
-          //     //             ),
-          //     //           ),
-          //     //           actions: [
-          //     //             TextButton(
-          //     //               onPressed: () {
-          //     //
-          //     //               },
-          //     //               child: Text('Update', style: TextStyle(color: Colors.pink),),
-          //     //             ),
-          //     //             TextButton(
-          //     //               onPressed: (){
-          //     //
-          //     //                 Navigator.of(context).pop();
-          //     //               },
-          //     //               child: Text('Cancel', style: TextStyle(color: Colors.blue),),
-          //     //             ),
-          //     //           ],
-          //     //         );
-          //     //       },
-          //     //     );
-          //     //   }, icon: Icon(
-          //     //   Icons.edit,
-          //     //   color: Colors.green,
-          //     // ),),
-          //     // IconButton(onPressed: () {
-          //     //   showDialog(
-          //     //     context: context,
-          //     //     builder:(BuildContext context){
-          //     //       return AlertDialog(
-          //     //         title: Text('Are You sure!'),
-          //     //         actions: [
-          //     //           TextButton(onPressed: () async {
-          //     //           },
-          //     //             child: Text('Yes',style: TextStyle(color: Colors.pink),),
-          //     //           ),
-          //     //           TextButton(onPressed: (){
-          //     //             Navigator.of(context).pop();
-          //     //           }, child: Text('No',style: TextStyle(color: Colors.blue),),
-          //     //           ),
-          //     //         ],
-          //     //
-          //     //       );
-          //     //     },
-          //     //   );
-          //     // },
-          //     //   icon: Icon(
-          //     //     Icons.delete,
-          //     //     color: Colors.pink,
-          //     //   ),),
-          //   ],
-          // )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+
+              IconButton(
+                onPressed: ()async{
+                  await showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Update Password'),
+                        content: TextField(
+                          decoration: InputDecoration(
+                              icon: Icon(
+                                Icons.password,
+                                color: Colors.blue,
+                              )
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+
+                            },
+                            child: Text('Update', style: TextStyle(color: Colors.pink),),
+                          ),
+                          TextButton(
+                            onPressed: (){
+
+                              Navigator.of(context).pop();
+                            },
+                            child: Text('Cancel', style: TextStyle(color: Colors.blue),),
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                }, icon: Icon(
+                Icons.edit,
+                color: Colors.green,
+              ),),
+              IconButton(onPressed: () {
+                showDialog(
+                  context: context,
+                  builder:(BuildContext context){
+                    return AlertDialog(
+                      title: Text('Are You sure!'),
+                      actions: [
+                        TextButton(onPressed: () async {
+                        },
+                          child: Text('Yes',style: TextStyle(color: Colors.pink),),
+                        ),
+                        TextButton(onPressed: (){
+                          Navigator.of(context).pop();
+                        }, child: Text('No',style: TextStyle(color: Colors.blue),),
+                        ),
+                      ],
+
+                    );
+                  },
+                );
+              },
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.pink,
+                ),),
+            ],
+          )
           ],
       ),
 
