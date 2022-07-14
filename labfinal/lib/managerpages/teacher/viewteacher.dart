@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:labfinal/weidget/cardweidget.dart';
 
+import '../../Method.dart';
+import '../../Pdffunction/mobiledart.dart';
 import '../../spinkit.dart';
 
 class viewteacher extends StatefulWidget {
@@ -18,10 +20,15 @@ class _viewteacherState extends State<viewteacher> {
   String subject = '';
   String classes = '';
   String pass = '';
-
+  bool loading=true;
+  bool isFirstTime=false;
+  final Pdfservices _pdfservices=Pdfservices();
+  List Pdfdata = [];
 
   Stream<QuerySnapshot> getUserdata() async* {
-    yield* FirebaseFirestore.instance.collection("teacher").snapshots();
+    final uid = await getuserid();
+    yield* FirebaseFirestore.instance.collection("institution")
+        .doc(uid).collection("teacher").snapshots();
   }
 
   @override
@@ -35,6 +42,29 @@ class _viewteacherState extends State<viewteacher> {
           style: TextStyle(
               color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold),
         ),
+        actions: [
+          IconButton(
+            onPressed:()async{
+              await getData();
+              if(Pdfdata.isNotEmpty){
+                setState(() {
+                  loading=true;
+                });
+                final data=await _pdfservices.createPdf(Pdfdata);
+                _pdfservices.saveAndLanchFile(data, "Teachers Record.pdf");
+                Pdfdata.clear();
+              }
+              else{
+                setState(() {
+                  loading=false;
+                });
+              }
+
+            },
+
+            icon: Icon(loading?Icons.download:Icons.arrow_circle_down_sharp),
+          ),
+        ],
       ),
       body: Container(
         height: 700.0,
@@ -65,5 +95,15 @@ class _viewteacherState extends State<viewteacher> {
         ),
       ),
     );
+  }
+  getData() async {
+    final uid = await getuserid();
+    await FirebaseFirestore.instance.collection("institution").doc(uid).collection("teacher").get().then((value) {
+      for(var i in value.docs) {
+        Pdfdata.add(i.data());
+
+
+      }
+    });
   }
 }
