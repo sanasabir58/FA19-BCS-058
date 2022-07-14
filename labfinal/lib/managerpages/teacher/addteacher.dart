@@ -1,6 +1,8 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import '../../Method.dart';
 class addteacher extends StatefulWidget {
   const addteacher({Key? key}) : super(key: key);
 
@@ -121,7 +123,8 @@ class _addteacherState extends State<addteacher> {
                             setState(() {
                               isloading=true;
                             });
-                            await FirebaseFirestore.instance.collection('teacher').add({'name':tname.text,'phone':phone.text,'email':email.text,'subject':subject.text,
+                            final uid=await getuserid();
+                            await FirebaseFirestore.instance.collection('institution').doc(uid).collection('teacher').add({'name':tname.text,'phone':phone.text,'email':email.text,'subject':subject.text,
                             'classes':classes.text,'passwpord':pass.text})
                               .then((value) {
                                 print(value.id);

@@ -10,7 +10,7 @@ class studentM extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text('Teacher Record',
+        title: Text('Student Record',
           style: TextStyle(color: Colors.white,fontSize: 20.0,
               fontWeight: FontWeight.bold),),
       ),
