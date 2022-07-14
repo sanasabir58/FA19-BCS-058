@@ -1,7 +1,10 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:labfinal/loginpages/resetpassword.dart';
 import 'package:labfinal/managerpages/managerdashboard.dart';
 import 'package:labfinal/signup.dart';
+
+import 'Method.dart';
 class loginpage extends StatefulWidget {
   const loginpage({Key? key}) : super(key: key);
 
@@ -10,6 +13,9 @@ class loginpage extends StatefulWidget {
 }
 
 class _loginpageState extends State<loginpage> {
+  TextEditingController email= TextEditingController();
+  TextEditingController password=TextEditingController();
+  bool isloading=false;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +47,7 @@ class _loginpageState extends State<loginpage> {
             SizedBox(height: 60.0,),
             Padding(padding: const EdgeInsets.symmetric(horizontal: 50),
               child: TextField(
+                controller: email,
                 decoration: InputDecoration(
                   hintText: 'Enter Your E-mail',
                   hintStyle: TextStyle(color: Colors.blue),
@@ -49,6 +56,7 @@ class _loginpageState extends State<loginpage> {
             SizedBox(height: 20.0,),
             Padding(padding: const EdgeInsets.symmetric(horizontal: 50),
               child: TextField(
+                controller: password,
                 decoration: InputDecoration(
                   hintText: 'Enter Your Password',
                   hintStyle: TextStyle(color: Colors.blue),
@@ -65,7 +73,32 @@ class _loginpageState extends State<loginpage> {
                 ),),
                 color: Colors.blue,
                 onPressed: () {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>managerdashB()));
+                  if(email.text.isNotEmpty&&password.text.isNotEmpty){
+                    setState(() {
+                      isloading=true;
+                    });
+                    Loginuser(email.text.trim(), password.text).then((user){
+                      if(user!=null){
+                        print("Login Successfully");
+                        setState(() {
+                          isloading=false;
+                          email.clear();
+                          password.clear();
+                        });
+
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>managerdashB()));
+
+
+                      }else{
+                        print("Login Failed");
+                        setState(() {
+                          isloading=false;
+                        });
+                      }
+                    } );
+                  }else{
+                    print("Please fill corrent information");
+                  }
                 },
                 enabled: true,
                 shadowDegree: ShadowDegree.dark,
@@ -99,7 +132,9 @@ class _loginpageState extends State<loginpage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>resetpassword()));
+                    },
                     child:Text('Forget Password?',style: TextStyle(
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,

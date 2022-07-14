@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:labfinal/loginpage.dart';
 import 'package:labfinal/loginpages/student%20login.dart';
 import 'package:labfinal/loginpages/teacherlogin.dart';
-import 'package:labfinal/weidget/cardweidget.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
