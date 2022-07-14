@@ -1,6 +1,8 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:labfinal/loginpage.dart';
+
+import 'Method.dart';
 class signup extends StatefulWidget {
   const signup({Key? key}) : super(key: key);
 
@@ -11,6 +13,9 @@ class signup extends StatefulWidget {
 class _signupState extends State<signup> {
   TextEditingController _email= TextEditingController();
   TextEditingController _password=TextEditingController();
+  TextEditingController _institute=TextEditingController();
+  bool isloading=false;
+
   final _form = GlobalKey<FormState>();
   bool emailValidation(String e){
     bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(e);
@@ -57,6 +62,14 @@ class _signupState extends State<signup> {
                    child: TextFormField(
                      decoration: InputDecoration(
                        hintText: 'Enter Your Name',
+                       hintStyle: TextStyle(color: Colors.blue),
+                     ),),),
+                 SizedBox(height: 20.0,),
+                 Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
+                   child: TextFormField(
+                     controller: _institute,
+                     decoration: InputDecoration(
+                       hintText: 'Enter Institute Name',
                        hintStyle: TextStyle(color: Colors.blue),
                      ),),),
                  SizedBox(height: 20.0,),
@@ -116,7 +129,37 @@ class _signupState extends State<signup> {
                        if(!_form.currentState!.validate()){
                          return;
                        }
-                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                       if(_form.currentState!.validate()){
+                         setState(() {
+                           isloading=true;
+                         });
+                         createAccount(_institute.text, _email.text.trim(), _password.text).then((user){
+                           if(user!=null){
+                             setState(() {
+                               isloading=false;
+                             });
+                             print("Signup successfully");
+                             _email.clear();
+                             _password.clear();
+                             _institute.clear();
+                             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                             const snackBar = SnackBar(
+                               content: Text('Create Account Successfully'),
+                             );
+                             ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                           }
+                           else{
+                             print("signup failed");
+                             setState(() {
+                               isloading=false;
+                             });
+                           }
+                         });
+                       }
+                       else{
+                         print("Please enter feild");
+                       };
+
                      },
                      enabled: true,
                      shadowDegree: ShadowDegree.dark,
