@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:labfinal/fees%20maintain.dart';
 import 'package:labfinal/spinkit.dart';
 import '../../Method.dart';
 import '../../Pdffunction/mobiledart.dart';
@@ -104,9 +105,9 @@ class customcard extends StatelessWidget {
     TextEditingController name=new TextEditingController(text: snapshot.docs[index]['name']);
     TextEditingController phone=new TextEditingController(text: snapshot.docs[index]['phone']);
     TextEditingController email=new TextEditingController(text: snapshot.docs[index]['email']);
-    TextEditingController subject=new TextEditingController(text: snapshot.docs[index]['subject']);
-    TextEditingController classes=new TextEditingController(text: snapshot.docs[index]['classes']);
+    TextEditingController classes=new TextEditingController(text: snapshot.docs[index]['class']);
     TextEditingController pass=new TextEditingController(text: snapshot.docs[index]['passwpord']);
+    TextEditingController fees=new TextEditingController(text: snapshot.docs[index]['fees']);
     return Card(
       margin: EdgeInsets.only(top:10.0),
       color:Colors.lightBlue.shade50 ,
@@ -144,17 +145,17 @@ class customcard extends StatelessWidget {
                     SizedBox(
                       height: 7.0,
                     ),
-                    Text("subject: ${snapshot.docs[index]['subject']}",
-                      style: TextStyle(color: Colors.grey),),
-                    SizedBox(
-                      height: 7.0,
-                    ),
-                    Text("class: ${snapshot.docs[index]['classes']}",
+                    Text("class: ${snapshot.docs[index]['class']}",
                       style: TextStyle(color: Colors.grey),),
                     SizedBox(
                       height: 7.0,
                     ),
                     Text("password: ${snapshot.docs[index]['passwpord']}",
+                      style: TextStyle(color: Colors.grey),),
+                    SizedBox(
+                      height: 7.0,
+                    ),
+                    Text("fee: ${snapshot.docs[index]['fees']}",
                       style: TextStyle(color: Colors.grey),),
                   ],
                 ),
@@ -203,15 +204,6 @@ class customcard extends StatelessWidget {
                                 ),
                               ),
                               TextField(
-                                controller: subject,
-                                decoration: InputDecoration(
-                                    icon: Icon(
-                                      Icons.subject_sharp,
-                                      color: Colors.blue,
-                                    )
-                                ),
-                              ),
-                              TextField(
                                 controller: classes,
                                 decoration: InputDecoration(
                                     icon: Icon(
@@ -229,18 +221,27 @@ class customcard extends StatelessWidget {
                                     )
                                 ),
                               ),
+                              TextField(
+                                controller: fees,
+                                decoration: InputDecoration(
+                                    icon: Icon(
+                                      Icons.password,
+                                      color: Colors.blue,
+                                    )
+                                ),
+                              ),
                             ],
                           ),
                         ),
                         actions: [
                           TextButton(
                             onPressed: () async {
-                              if(name.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&subject.text.isNotEmpty&&classes.text.isNotEmpty&&
+                              if(name.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&classes.text.isNotEmpty&&
                                   pass.text.isNotEmpty)
                               {
                                 final uid=await getuserid();
-                                FirebaseFirestore.instance.collection('institution').doc(uid).collection("students").doc(docId).update({"name":name.text,"phone":phone.text,"email":email.text,"subject":subject.text,"classes":classes.text,
-                                  "passwpord":pass.text,
+                                FirebaseFirestore.instance.collection('institution').doc(uid).collection("students").doc(docId).update({"name":name.text,"phone":phone.text,"email":email.text,"classes":classes.text,
+                                  "passwpord":pass.text,'fee':fees
                                 }).then((value) {
                                   Navigator.pop(context);
                                 });

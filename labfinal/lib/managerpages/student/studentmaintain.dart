@@ -2,6 +2,8 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:labfinal/managerpages/student/addstudent.dart';
 import 'package:labfinal/managerpages/student/viewstudent.dart';
+
+import 'assign subject.dart';
 class studentM extends StatelessWidget {
   const studentM({Key? key}) : super(key: key);
 
@@ -28,12 +30,12 @@ class studentM extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AnimatedButton(
-              height: 200.0,
-              width: 200.0,
+              height: 160.0,
+              width: 300.0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image(image: AssetImage('images/t1.png'),),
+                  Image(image: AssetImage('images/ss2.png'),height: 100),
                   SizedBox(width: 10.0),
                   Text(
                     'Add Student',
@@ -53,12 +55,12 @@ class studentM extends StatelessWidget {
             ),
             SizedBox(height: 10.0,),
             AnimatedButton(
-              height: 200.0,
-              width: 200.0,
+              height: 160.0,
+              width: 300.0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image(image: AssetImage('images/t1.png'),),
+                  Image(image: AssetImage('images/ss1.png'),height: 100),
                   SizedBox(width: 10.0),
                   Text(
                     'View Student \n Record',
@@ -72,6 +74,31 @@ class studentM extends StatelessWidget {
               color: Colors.white,
               onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>viewstudent()));
+              },
+              enabled: true,
+              shadowDegree: ShadowDegree.dark,
+            ),
+            SizedBox(height: 10.0,),
+            AnimatedButton(
+              height: 160.0,
+              width: 300.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(image: AssetImage('images/t1.png'),height: 100),
+                  SizedBox(width: 10.0),
+                  Text(
+                    'Assign Student Subject',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 22,
+                      color: Colors.blue,
+                      fontWeight: FontWeight.w500,),),
+                ],
+              ),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>addsubStudent()));
               },
               enabled: true,
               shadowDegree: ShadowDegree.dark,
