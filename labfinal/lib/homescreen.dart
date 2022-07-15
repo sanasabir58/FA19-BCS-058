@@ -112,7 +112,7 @@ class home extends StatelessWidget {
                   ),
                   color: Colors.blue.shade50,
                   onPressed: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>teacherlogin()));
                   },
                   enabled: true,
                   shadowDegree: ShadowDegree.dark,
@@ -170,7 +170,7 @@ class home extends StatelessWidget {
                   ),
                   color: Colors.blue.shade50,
                   onPressed: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>studentlogin()));
                   },
                   enabled: true,
                   shadowDegree: ShadowDegree.dark,
