@@ -104,6 +104,30 @@ class _loginpageState extends State<loginpage> {
                 shadowDegree: ShadowDegree.dark,
               ),),
             SizedBox(
+              height: 15.0,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>resetpassword()));
+                    },
+                    child:Text('Forget Password?',style: TextStyle(
+                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 16.0,
+
+
+                    ),),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
               height: 20.0,
             ),
             Row(
@@ -123,31 +147,7 @@ class _loginpageState extends State<loginpage> {
                   ),),
               ],
             ),
-            SizedBox(
-              height: 15.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>resetpassword()));
-                    },
-                    child:Text('Forget Password?',style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic,
-                      decoration: TextDecoration.underline,
-                      fontSize: 16.0,
 
-
-                    ),),
-                  ),
-                ],
-              ),
-            ),
 
           ],
         ),
