@@ -1,5 +1,7 @@
 import 'package:animated_button/animated_button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:labfinal/Method.dart';
 class addclass extends StatefulWidget {
   const addclass({Key? key}) : super(key: key);
 
@@ -8,6 +10,8 @@ class addclass extends StatefulWidget {
 }
 
 class _addclassState extends State<addclass> {
+  TextEditingController classN=new TextEditingController();
+  bool isloading=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,15 +38,9 @@ class _addclassState extends State<addclass> {
             children: [
               Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: TextFormField(
+                  controller: classN,
                   decoration: InputDecoration(
                     hintText: 'Enter Class',
-                    hintStyle: TextStyle(color: Colors.blue),
-                  ),),),
-              SizedBox(height: 20.0,),
-              Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Enter fee',
                     hintStyle: TextStyle(color: Colors.blue),
                   ),),),
               SizedBox(height: 20.0,),
@@ -56,7 +54,30 @@ class _addclassState extends State<addclass> {
                     fontWeight: FontWeight.w500,
                   ),),
                   color: Colors.blue,
-                  onPressed: () {
+                  onPressed: () async {
+                    if(classN.text.isNotEmpty){
+                      {
+                        setState(() {
+                          isloading=true;
+                        });
+                        final uid=await getuserid();
+                        await FirebaseFirestore.instance.collection('institution').doc(uid).collection('classes').add({'classN':classN.text})
+                            .then((value){
+                          print(value.id);
+                          setState(() {
+                            isloading=false;
+                          });
+                          classN.clear();
+
+                          const snackBar = SnackBar(
+                            content: Text('Data Save Successfully'),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        }).catchError((error){
+                          print(error);
+                        });
+                      }
+                    }
                     // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>()));
                   },
                   enabled: true,
@@ -67,3 +88,4 @@ class _addclassState extends State<addclass> {
     );
   }
 }
+
