@@ -1,5 +1,6 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../Method.dart';
@@ -13,7 +14,7 @@ class addstudent extends StatefulWidget {
 class _addstudentState extends State<addstudent> {
   Stream<QuerySnapshot> subjectData()async*{
     final uid=await getuserid();
-    yield* FirebaseFirestore.instance.collection('institution').doc(uid).collection('subject').snapshots();
+    yield* FirebaseFirestore.instance.collection('institution').doc(uid).collection('classes').snapshots();
   }
   TextEditingController name=new TextEditingController();
   TextEditingController phone=new TextEditingController();
@@ -22,17 +23,23 @@ class _addstudentState extends State<addstudent> {
   TextEditingController classes=new TextEditingController();
   TextEditingController pass=new TextEditingController();
   bool isloading=false;
-  var tsubject;
-
+  var sclass;
+  String? fees;
+  loadFees() async{
+    FirebaseFirestore.instance.collection('institution').doc(FirebaseAuth.instance.currentUser!.uid).collection('fees').where("classes",isEqualTo: sclass).get().then((document) {
+      fees=document.docs[0]['fee'];
+    });
+    print("*****${fees}***");
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text('Add student Record',
-          style: TextStyle(color: Colors.white,fontSize: 20.0,
-              fontWeight: FontWeight.bold),),
-      ),
+      backgroundColor: Colors.blue,
+      title: Text('Add student Record',
+        style: TextStyle(color: Colors.white,fontSize: 20.0,
+            fontWeight: FontWeight.bold),),
+    ),
       body: SingleChildScrollView(
         child: Container(
             height: 700.0,
@@ -121,8 +128,8 @@ class _addstudentState extends State<addstudent> {
                           DocumentSnapshot snap=snapshot.data.docs[i];
                           classname.add(
                             DropdownMenuItem(
-                              child: Text(snap['subjectN'],style: TextStyle(color: Colors.blue,fontSize: 12),),
-                              value: "${snap['subjectN']}",
+                              child: Text(snap['classN'],style: TextStyle(color: Colors.blue,fontSize: 12),),
+                              value: "${snap['classN']}",
                             ),
                           );
                         }
@@ -145,11 +152,12 @@ class _addstudentState extends State<addstudent> {
                                 DropdownButton<dynamic>(
                                   items: classname, onChanged: (subject){
                                   setState(() {
-                                    tsubject=subject;
+                                    sclass=subject;
+                                    loadFees();
                                   });
                                 },
-                                  value: tsubject,
-                                  hint: Text("Select subject",style: TextStyle(color: Colors.blue,fontSize: 12,),),
+                                  value: sclass,
+                                  hint: Text("Select class",style: TextStyle(color: Colors.blue,fontSize: 12,),),
 
 
                                 ),
@@ -165,19 +173,8 @@ class _addstudentState extends State<addstudent> {
                   SizedBox(
                     height: 20.0,
                   ),
-                  Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: TextFormField(
-                      controller: classes,
-
-                      decoration: InputDecoration(
-                        hintText: 'Select student Class',
-                        hintStyle: TextStyle(color: Colors.blue),
-                      ),
-                    ),),
-                  SizedBox(
-                    height: 20.0,
-                  ),
-                  Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: TextFormField(
                       controller: pass,
 
@@ -201,14 +198,18 @@ class _addstudentState extends State<addstudent> {
                       ),),
                       color: Colors.blue,
                       onPressed: () async {
-                            if(name.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&tsubject.toString().isNotEmpty&&classes.text.isNotEmpty&&pass.text.isNotEmpty)
+                            if(name.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&sclass.toString().isNotEmpty&&pass.text.isNotEmpty)
                           {
                             setState(() {
                               isloading=true;
+                              loadFees();
                             });
                             final uid=await getuserid();
-                            await FirebaseFirestore.instance.collection('institution').doc(uid).collection('students').add({'name':name.text,'phone':phone.text,'email':email.text,'subject':tsubject.toString(),
-                              'classes':classes.text,'passwpord':pass.text})
+                            await FirebaseFirestore.instance.collection('institution').doc(uid).collection('students').add({'name':name.text,'phone':phone.text,'email':email.text,'class':sclass.toString(),
+                              'passwpord':pass.text,'fees':fees});
+                            FirebaseFirestore.instance.collection('students').add({'name':name.text,'phone':phone.text,
+                              'email':email.text,'class':sclass.toString(),
+                              'passwpord':pass.text,'fees':fees})
                                 .then((value){
                                   print(value.id);
                                   setState(() {

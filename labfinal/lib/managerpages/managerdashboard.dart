@@ -6,6 +6,7 @@ import 'package:labfinal/maintain%20subject/subject%20maintain.dart';
 import 'package:labfinal/managerpages/classes/classM.dart';
 import 'package:labfinal/managerpages/student/studentmaintain.dart';
 import 'package:labfinal/managerpages/teacher/teachermaintain.dart';
+import 'package:labfinal/notification/maintainnotification.dart';
 
 import '../Method.dart';
 
@@ -188,7 +189,7 @@ class managerdashB extends StatelessWidget {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=>notification()));
               },
               enabled: true,
               shadowDegree: ShadowDegree.light,

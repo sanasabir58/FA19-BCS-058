@@ -113,12 +113,6 @@ class CustomCard extends StatelessWidget {
                             children: [
                               TextField(
                                 controller: classes,
-                                decoration: InputDecoration(
-                                    icon: Icon(
-                                      Icons.phone,
-                                      color: Colors.blue,
-                                    )
-                                ),
                               ),
                             ],
                           ),
