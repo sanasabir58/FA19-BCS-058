@@ -2,18 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:labfinal/Method.dart';
 import 'package:labfinal/spinkit.dart';
-class viewclass extends StatefulWidget {
-  const viewclass({Key? key}) : super(key: key);
+class viewsubject extends StatefulWidget {
+  const viewsubject({Key? key}) : super(key: key);
 
   @override
-  _viewclassState createState() => _viewclassState();
+  _viewsubjectState createState() => _viewsubjectState();
 }
 
-class _viewclassState extends State<viewclass> {
+class _viewsubjectState extends State<viewsubject> {
   Stream<QuerySnapshot> getUserdata() async* {
     final uid = await getuserid();
     yield* FirebaseFirestore.instance.collection("institution")
-        .doc(uid).collection("classes").snapshots();
+        .doc(uid).collection("subject").snapshots();
   }
   bool loading=true;
   @override
@@ -22,7 +22,7 @@ class _viewclassState extends State<viewclass> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text('view Classes',
+        title: Text('view subject',
           style: TextStyle(color: Colors.white,fontSize: 20.0,
               fontWeight: FontWeight.bold),),
       ),
@@ -64,7 +64,7 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var docId=snapshot.docs[index].id;
-    TextEditingController classes=new TextEditingController(text: snapshot.docs[index]['classN']);
+    TextEditingController subjectN=new TextEditingController(text: snapshot.docs[index]['subjectN']);
 
     return Card(
       margin: EdgeInsets.only(top:10.0),
@@ -75,7 +75,7 @@ class CustomCard extends StatelessWidget {
             leading: CircleAvatar(
               backgroundColor: Colors.blue.shade400,
               radius: 25.0,
-              child: Text("${snapshot.docs[index]['classN'][0]}",style: TextStyle(
+              child: Text("${snapshot.docs[index]['subjectN'][0]}",style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0
@@ -86,7 +86,7 @@ class CustomCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("class: ${snapshot.docs[index]['classN']}",
+                    Text("subject: ${snapshot.docs[index]['subjectN']}",
                       style: TextStyle(color: Colors.black),),
                     SizedBox(
                       height: 5.0,
@@ -112,7 +112,7 @@ class CustomCard extends StatelessWidget {
                           child: Column(
                             children: [
                               TextField(
-                                controller: classes,
+                                controller: subjectN,
                                 decoration: InputDecoration(
                                     icon: Icon(
                                       Icons.phone,
@@ -126,10 +126,10 @@ class CustomCard extends StatelessWidget {
                         actions: [
                           TextButton(
                             onPressed: () async {
-                              if(classes.text.isNotEmpty)
+                              if(subjectN.text.isNotEmpty)
                               {
                                 final uid=await getuserid();
-                                FirebaseFirestore.instance.collection('institution').doc(uid).collection("classes").doc(docId).update({'classN':classes.text
+                                FirebaseFirestore.instance.collection('institution').doc(uid).collection("subject").doc(docId).update({'subjectN':subjectN.text
                                 }).then((value) {
                                   Navigator.pop(context);
                                 });
@@ -163,7 +163,7 @@ class CustomCard extends StatelessWidget {
                         TextButton(onPressed: () async {
                           Navigator.of(context).pop();
                           final uid=await getuserid();
-                          var FirebaseReference=FirebaseFirestore.instance.collection('institution').doc(uid).collection('classes');
+                          var FirebaseReference=FirebaseFirestore.instance.collection('institution').doc(uid).collection('subject');
                           await FirebaseReference.doc(docId).delete();
                         },
                           child: Text('Yes',style: TextStyle(color: Colors.pink),),
@@ -186,6 +186,7 @@ class CustomCard extends StatelessWidget {
           )
         ],
       ),
+
     );
   }
 }

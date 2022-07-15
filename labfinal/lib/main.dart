@@ -7,7 +7,7 @@ import 'package:labfinal/loginpages/student%20login.dart';
 import 'package:labfinal/loginpages/teacherlogin.dart';
 import 'package:labfinal/managerpages/classes/addclass.dart';
 import 'package:labfinal/splash.dart';
-
+ 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();

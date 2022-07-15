@@ -11,6 +11,10 @@ class addstudent extends StatefulWidget {
 }
 
 class _addstudentState extends State<addstudent> {
+  Stream<QuerySnapshot> subjectData()async*{
+    final uid=await getuserid();
+    yield* FirebaseFirestore.instance.collection('institution').doc(uid).collection('subject').snapshots();
+  }
   TextEditingController name=new TextEditingController();
   TextEditingController phone=new TextEditingController();
   TextEditingController email=new TextEditingController();
@@ -18,6 +22,7 @@ class _addstudentState extends State<addstudent> {
   TextEditingController classes=new TextEditingController();
   TextEditingController pass=new TextEditingController();
   bool isloading=false;
+  var tsubject;
 
   @override
   Widget build(BuildContext context) {
@@ -73,14 +78,90 @@ class _addstudentState extends State<addstudent> {
 
                     ),),
                   SizedBox(height: 20.0,),
-                  Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: TextFormField(
-                      controller: subject,
-                      decoration: InputDecoration(
-                        hintText: 'Enter student Subject',
-                        hintStyle: TextStyle(color: Colors.blue),
-                      ),
-                    ),),
+                  // Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
+                  //   child: TextFormField(
+                  //     controller: subject,
+                  //     decoration: InputDecoration(
+                  //       hintText: 'Enter student Subject',
+                  //       hintStyle: TextStyle(color: Colors.blue),
+                  //     ),
+                  //   ),),
+                  StreamBuilder<QuerySnapshot>(
+                    stream: subjectData(),
+                    builder: (context,AsyncSnapshot snapshot){
+                      if(!snapshot.hasData){
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: TextFormField(
+                            readOnly: true,
+                            decoration: InputDecoration(
+                              hintText: "Data not available",
+                              hintStyle: TextStyle(color: Colors.blue.shade50),
+                              prefixIcon: Icon(
+                                Icons.class__outlined,
+                                color: Colors.blue,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                BorderSide(width: 3, color: Colors.blue),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                BorderSide(width: 3, color: Colors.blue),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      else{
+                        List<DropdownMenuItem>classname=[];
+                        for(int i=0;i<snapshot.data.docs.length;i++){
+                          DocumentSnapshot snap=snapshot.data.docs[i];
+                          classname.add(
+                            DropdownMenuItem(
+                              child: Text(snap['subjectN'],style: TextStyle(color: Colors.blue,fontSize: 12),),
+                              value: "${snap['subjectN']}",
+                            ),
+                          );
+                        }
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            // decoration: BoxDecoration(
+                            //   border: Border.all(
+                            //       color: Colors.blue,
+                            //       width: 1
+                            //   ),
+                            //   borderRadius: BorderRadius.circular(5),
+                            //
+                            // ),
+                            child: Row(
+                              children:[
+                                Icon(Icons.class__outlined,color: Colors.blue,),
+                                SizedBox(width: 20,),
+                                DropdownButton<dynamic>(
+                                  items: classname, onChanged: (subject){
+                                  setState(() {
+                                    tsubject=subject;
+                                  });
+                                },
+                                  value: tsubject,
+                                  hint: Text("Select subject",style: TextStyle(color: Colors.blue,fontSize: 12,),),
+
+
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        );
+
+                      }
+                    },
+                  ),
                   SizedBox(
                     height: 20.0,
                   ),
@@ -120,13 +201,13 @@ class _addstudentState extends State<addstudent> {
                       ),),
                       color: Colors.blue,
                       onPressed: () async {
-                            if(name.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&subject.text.isNotEmpty&&classes.text.isNotEmpty&&pass.text.isNotEmpty)
+                            if(name.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&tsubject.toString().isNotEmpty&&classes.text.isNotEmpty&&pass.text.isNotEmpty)
                           {
                             setState(() {
                               isloading=true;
                             });
                             final uid=await getuserid();
-                            await FirebaseFirestore.instance.collection('institution').doc(uid).collection('students').add({'name':name.text,'phone':phone.text,'email':email.text,'subject':subject.text,
+                            await FirebaseFirestore.instance.collection('institution').doc(uid).collection('students').add({'name':name.text,'phone':phone.text,'email':email.text,'subject':tsubject.toString(),
                               'classes':classes.text,'passwpord':pass.text})
                                 .then((value){
                                   print(value.id);

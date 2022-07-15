@@ -2,6 +2,7 @@ import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:labfinal/aboutpage.dart';
 import 'package:labfinal/fees%20maintain.dart';
+import 'package:labfinal/maintain%20subject/subject%20maintain.dart';
 import 'package:labfinal/managerpages/classes/classM.dart';
 import 'package:labfinal/managerpages/student/studentmaintain.dart';
 import 'package:labfinal/managerpages/teacher/teachermaintain.dart';
@@ -137,7 +138,7 @@ class managerdashB extends StatelessWidget {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=>loginpage()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=>subject()));
               },
               enabled: true,
               shadowDegree: ShadowDegree.light,
