@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:labfinal/homescreen.dart';
 import 'package:splash_screen_view/SplashScreenView.dart';
+
+import 'CheckUser.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SplashScreenView(
-        navigateRoute: home(),
+        navigateRoute: CheckUser(),
         duration: 5000,
         imageSize: 130,
         imageSrc: "images/t1.png",

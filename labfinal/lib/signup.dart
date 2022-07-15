@@ -102,8 +102,8 @@ class _signupState extends State<signup> {
                    child: TextFormField(
                      controller: _password,
                      validator: (value){
-                       if(value!.isEmpty||value.length<7){
-                         return "Please enter at least 7 character";
+                       if(value!.isEmpty||value.length<5){
+                         return "Please enter at least 5 character";
                        }
                        return null;
                      },
