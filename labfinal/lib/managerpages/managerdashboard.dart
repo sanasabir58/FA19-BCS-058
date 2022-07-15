@@ -1,8 +1,12 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:labfinal/aboutpage.dart';
+import 'package:labfinal/fees%20maintain.dart';
 import 'package:labfinal/managerpages/classes/classM.dart';
 import 'package:labfinal/managerpages/student/studentmaintain.dart';
 import 'package:labfinal/managerpages/teacher/teachermaintain.dart';
+
+import '../Method.dart';
 
 class managerdashB extends StatelessWidget {
   const managerdashB({Key? key}) : super(key: key);
@@ -16,6 +20,14 @@ class managerdashB extends StatelessWidget {
       title: Text('DashBoard',
         style: TextStyle(color: Colors.white,fontSize: 20.0,
             fontWeight: FontWeight.bold),),
+        actions: [
+          IconButton(onPressed: (){
+            logout(context);
+          }, icon: Icon(Icons.logout),),
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> Aboutpage()));
+          }, icon: Icon(Icons.account_balance_outlined),),
+        ],
     ),
       body: Container(
         height: 700.0,
@@ -54,6 +66,7 @@ class managerdashB extends StatelessWidget {
               enabled: true,
               shadowDegree: ShadowDegree.light,
             ),
+
             SizedBox(height: 10.0,),
             AnimatedButton(
               height: 70.0,
@@ -99,7 +112,7 @@ class managerdashB extends StatelessWidget {
               ),
               color: Colors.lightBlue,
               onPressed: () {
-                 // Navigator.push(context, MaterialPageRoute(builder: (context)=>studentM()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>fees()));
               },
               enabled: true,
               shadowDegree: ShadowDegree.light,

@@ -11,12 +11,6 @@ class viewstudent extends StatefulWidget {
 }
 
 class _viewstudentState extends State<viewstudent> {
-  String tname = '';
-  String phone = '';
-  String email = '';
-  String subject = '';
-  String classes = '';
-  String pass = '';
   bool loading=true;
   bool isFirstTime=false;
   final Pdfservices _pdfservices=Pdfservices();
