@@ -15,6 +15,10 @@ class _addteacherState extends State<addteacher> {
     final uid=await getuserid();
     yield* FirebaseFirestore.instance.collection('institution').doc(uid).collection('classes').snapshots();
   }
+  Stream<QuerySnapshot> subjectData()async*{
+    final uid=await getuserid();
+    yield* FirebaseFirestore.instance.collection('institution').doc(uid).collection('subject').snapshots();
+  }
   TextEditingController tname=new TextEditingController();
   TextEditingController phone=new TextEditingController();
   TextEditingController email=new TextEditingController();
@@ -23,6 +27,7 @@ class _addteacherState extends State<addteacher> {
   TextEditingController classes=new TextEditingController();
   bool isloading=false;
   var tclasses;
+  var tsubject;
 
   @override
   Widget build(BuildContext context) {
@@ -78,14 +83,82 @@ class _addteacherState extends State<addteacher> {
 
                     ),),
                   SizedBox(height: 20.0,),
-                  Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: TextFormField(
-                      controller: subject,
-                      decoration: InputDecoration(
-                        hintText: 'Enter teacher Subject',
-                        hintStyle: TextStyle(color: Colors.blue),
-                      ),
-                    ),),
+                  StreamBuilder<QuerySnapshot>(
+                    stream: subjectData(),
+                    builder: (context,AsyncSnapshot snapshot){
+                      if(!snapshot.hasData){
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: TextFormField(
+                            readOnly: true,
+                            decoration: InputDecoration(
+                              hintText: "Data not available",
+                              hintStyle: TextStyle(color: Colors.blue.shade50),
+                              prefixIcon: Icon(
+                                Icons.class__outlined,
+                                color: Colors.blue,
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                BorderSide(width: 3, color: Colors.blue),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                BorderSide(width: 3, color: Colors.blue),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      else{
+                        List<DropdownMenuItem>classname=[];
+                        for(int i=0;i<snapshot.data.docs.length;i++){
+                          DocumentSnapshot snap=snapshot.data.docs[i];
+                          classname.add(
+                            DropdownMenuItem(
+                              child: Text(snap['subjectN'],style: TextStyle(color: Colors.blue,fontSize: 12),),
+                              value: "${snap['subjectN']}",
+                            ),
+                          );
+                        }
+                        return Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Container(
+                            padding: EdgeInsets.all(8),
+                            // decoration: BoxDecoration(
+                            //   border: Border.all(
+                            //       color: Colors.blue,
+                            //       width: 1
+                            //   ),
+                            //   borderRadius: BorderRadius.circular(5),
+                            //
+                            // ),
+                            child: Row(
+                              children:[
+                                Icon(Icons.class__outlined,color: Colors.blue,),
+                                SizedBox(width: 20,),
+                                DropdownButton<dynamic>(
+                                  items: classname, onChanged: (subject){
+                                  setState(() {
+                                    tsubject=subject;
+                                  });
+                                },
+                                  value: tsubject,
+                                  hint: Text("Select subject",style: TextStyle(color: Colors.blue,fontSize: 12,),),
+
+
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        );
+
+                      }
+                    },
+                  ),
                   SizedBox(
                     height: 20.0,
                   ),
@@ -199,14 +272,16 @@ class _addteacherState extends State<addteacher> {
                       ),),
                       color: Colors.blue,
                       onPressed: () async {
-                        if(tname.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&subject.text.isNotEmpty&&tclasses.toString().isNotEmpty&&pass.text.isNotEmpty)
+                        if(tname.text.isNotEmpty&&phone.text.isNotEmpty&&email.text.isNotEmpty&&tsubject.toString().isNotEmpty&&tclasses.toString().isNotEmpty&&pass.text.isNotEmpty)
                           {
                             setState(() {
                               isloading=true;
                             });
                             final uid=await getuserid();
-                            await FirebaseFirestore.instance.collection('institution').doc(uid).collection('teacher').add({'name':tname.text,'phone':phone.text,'email':email.text,'subject':subject.text,
-                            'classes':tclasses.toString(),'passwpord':pass.text})
+                            await FirebaseFirestore.instance.collection('institution').doc(uid).collection('teacher').add({'name':tname.text,'phone':phone.text,'email':email.text,'subject':tsubject.toString(),
+                            'classes':tclasses.toString(),'passwpord':pass.text});
+                            FirebaseFirestore.instance.collection('teacher').add({'name':tname.text,'phone':phone.text,'email':email.text,'subject':tsubject.toString(),
+                              'classes':tclasses.toString(),'passwpord':pass.text})
                               .then((value) {
                                 print(value.id);
                                 setState(() {

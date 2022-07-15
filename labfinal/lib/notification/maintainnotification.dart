@@ -1,16 +1,16 @@
 import 'package:animated_button/animated_button.dart';
 import 'package:flutter/material.dart';
-import 'package:labfinal/managerpages/teacher/addteacher.dart';
-import 'package:labfinal/managerpages/teacher/viewteacher.dart';
-class teacherM extends StatelessWidget {
-  const teacherM({Key? key}) : super(key: key);
+import 'package:labfinal/notification/add%20notification.dart';
+import 'package:labfinal/notification/view%20notification.dart';
+class notification extends StatelessWidget {
+  const notification({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text('Teacher Record',
+        title: Text('Notification',
           style: TextStyle(color: Colors.white,fontSize: 20.0,
               fontWeight: FontWeight.bold),),
       ),
@@ -36,7 +36,7 @@ class teacherM extends StatelessWidget {
                   Image(image: AssetImage('images/t1.png'),),
                   SizedBox(width: 10.0),
                   Text(
-                    'Add Teacher',
+                    'Add Notification',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
@@ -46,7 +46,7 @@ class teacherM extends StatelessWidget {
               ),
               color: Colors.white,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>addteacher()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=>addnotification()));
               },
               enabled: true,
               shadowDegree: ShadowDegree.dark,
@@ -58,10 +58,10 @@ class teacherM extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image(image: AssetImage('images/s1.png'),height: 100),
+                  Image(image: AssetImage('images/t1.png'),),
                   SizedBox(width: 10.0),
                   Text(
-                    'View Teacher \n Record',
+                    'View Notification',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
@@ -71,7 +71,7 @@ class teacherM extends StatelessWidget {
               ),
               color: Colors.white,
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>viewteacher()));
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=>viewnotification()));
               },
               enabled: true,
               shadowDegree: ShadowDegree.dark,

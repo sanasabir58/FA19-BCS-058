@@ -4,6 +4,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:labfinal/homescreen.dart';
 import 'package:labfinal/loginpage.dart';
 
 Future<User?>createAccount(String name,String email, String password,)async{
@@ -46,7 +47,7 @@ Future logout(BuildContext context)async{
   FirebaseAuth _auth=FirebaseAuth.instance;
   try{
     await _auth.signOut();
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>loginpage()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>home()));
   }catch(e){
     print(e);
   }
