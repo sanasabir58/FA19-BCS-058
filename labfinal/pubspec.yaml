@@ -43,6 +43,7 @@ dependencies:
   path_provider: ^2.0.10
   open_file: ^3.2.1
   pdf: ^3.8.1
+  splash_screen_view: ^3.0.0
 
 
 dev_dependencies:

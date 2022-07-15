@@ -41,7 +41,7 @@ class _signupState extends State<signup> {
                mainAxisAlignment: MainAxisAlignment.center,
                crossAxisAlignment: CrossAxisAlignment.stretch,
                children: [
-                 SizedBox(height: 10.0,),
+                 SizedBox(height: 5.0,),
                  Center(
                    child: Text('SignUp Here!', style: TextStyle(
                        fontSize: 34.0,
@@ -57,7 +57,7 @@ class _signupState extends State<signup> {
                        color: Colors.blue
                    ),),
                  ),
-                 SizedBox(height: 50.0,),
+                 SizedBox(height: 20.0,),
                  Padding(padding: const EdgeInsets.symmetric(horizontal: 25),
                    child: TextFormField(
                      decoration: InputDecoration(
@@ -165,7 +165,7 @@ class _signupState extends State<signup> {
                      shadowDegree: ShadowDegree.dark,
                    ),),
                  SizedBox(
-                   height: 20.0,
+                   height: 10.0,
                  ),
                  Row(
                    mainAxisAlignment: MainAxisAlignment.center,

@@ -5,11 +5,6 @@ import 'package:flutter/material.dart';
 import '../Method.dart';
 class customcard extends StatelessWidget {
 
-  // TextEditingController phone=new TextEditingController();
-  // TextEditingController email=new TextEditingController();
-  // TextEditingController subject=new TextEditingController();
-  // TextEditingController classes=new TextEditingController();
-  // TextEditingController pass=new TextEditingController();
   customcard({required this.snapshot,required this.index});
   final QuerySnapshot snapshot;
   final int index;
